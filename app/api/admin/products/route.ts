@@ -1,0 +1,87 @@
+import { NextResponse } from "next/server";
+import { z } from "zod";
+import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/session";
+
+const createProductSchema = z.object({
+  name: z.string().min(2),
+  slug: z.string().min(2),
+  sku: z.string().min(2),
+  brandId: z.string(),
+  categoryIds: z.array(z.string()).min(1),
+  gender: z.enum(["HOMME", "FEMME", "ENFANT", "UNISEXE"]),
+  usage: z.enum(["RUNNING", "STREETWEAR", "TRAINING", "VILLE", "SPORT"]).optional(),
+  description: z.string().min(10),
+  basePrice: z.number().positive(),
+  compareAtPrice: z.number().optional(),
+  variants: z
+    .array(
+      z.object({
+        sizeEu: z.number(),
+        colorName: z.string(),
+        stock: z.number().int().nonnegative(),
+      })
+    )
+    .min(1),
+});
+
+export async function GET() {
+  const admin = await requireAdmin();
+  if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
+
+  const products = await prisma.product.findMany({
+    include: { brand: true, variants: true },
+    orderBy: { createdAt: "desc" },
+  });
+  return NextResponse.json({ products });
+}
+
+export async function POST(request: Request) {
+  const admin = await requireAdmin();
+  if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
+
+  const body = await request.json();
+  const parsed = createProductSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+  }
+  const data = parsed.data;
+
+  const product = await prisma.$transaction(async (tx) => {
+    const created = await tx.product.create({
+      data: {
+        name: data.name,
+        slug: data.slug,
+        sku: data.sku,
+        brandId: data.brandId,
+        gender: data.gender,
+        usage: data.usage,
+        description: data.description,
+        basePrice: data.basePrice,
+        compareAtPrice: data.compareAtPrice,
+        isPublished: false, // publié explicitement ensuite depuis la liste admin
+        categories: { create: data.categoryIds.map((categoryId) => ({ categoryId })) },
+      },
+    });
+
+    for (const v of data.variants) {
+      const size = await tx.size.upsert({
+        where: { eu: v.sizeEu },
+        update: {},
+        create: { eu: v.sizeEu },
+      });
+      const color = await tx.color.upsert({
+        where: { name: v.colorName },
+        update: {},
+        create: { name: v.colorName, hexCode: "#64748B" },
+      });
+      await tx.variant.create({
+        data: { productId: created.id, sizeId: size.id, colorId: color.id, stock: v.stock },
+      });
+    }
+
+    return created;
+  });
+
+  return NextResponse.json({ product }, { status: 201 });
+}

@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Helvetica Now Text";
+  src: url("https://db.onlinewebfonts.com/c/08e020de1811ec4489f82d1247a42c09?family=Helvetica+Now+Text");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  /* Neutres bleu-gris (base UI) */
+  --rho-ink-950: #0b1220;
+  --rho-ink-900: #111827;
+  --rho-slate-800: #1e293b;
+  --rho-slate-700: #334155;
+  --rho-slate-600: #475569;
+  --rho-slate-500: #64748b;
+  --rho-slate-400: #94a3b8;
+  --rho-slate-300: #cbd5e1;
+  --rho-slate-200: #e2e8f0;
+  --rho-slate-100: #f1f5f9;
+  --rho-white: #f8fafc;
+  --rho-white-pure: #ffffff;
+
+  /* Accent vif — bleu RHO */
+  --rho-blue-700: #1d4ed8;
+  --rho-blue-600: #2563eb; /* couleur de marque principale */
+  --rho-blue-500: #3b82f6;
+  --rho-blue-400: #60a5fa;
+
+  /* Accent secondaire vif — cyan */
+  --rho-cyan-500: #06b6d4;
+  --rho-cyan-400: #22d3ee;
+
+  /* États */
+  --rho-success: #10b981;
+  --rho-warning: #f59e0b;
+  --rho-danger: #ef4444;
+
+  /* Sémantique — light par défaut */
+  --rho-bg: var(--rho-white);
+  --rho-surface: var(--rho-white-pure);
+  --rho-surface-2: var(--rho-slate-100);
+  --rho-text: var(--rho-ink-950);
+  --rho-text-muted: var(--rho-slate-500);
+
+  --rho-glass-bg: rgba(15, 23, 42, 0.06);
+  --rho-glass-border: rgba(15, 23, 42, 0.1);
+}
+
+.dark {
+  --rho-bg: var(--rho-ink-950);
+  --rho-surface: var(--rho-ink-900);
+  --rho-surface-2: var(--rho-slate-800);
+  --rho-text: var(--rho-white);
+  --rho-text-muted: var(--rho-slate-400);
+
+  --rho-glass-bg: rgba(255, 255, 255, 0.08);
+  --rho-glass-border: rgba(255, 255, 255, 0.14);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--rho-bg);
+    color: var(--rho-text);
+    font-family:
+      "Helvetica Now Text",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  .liquid-glass {
+    background: var(--rho-glass-bg);
+    border: 1px solid var(--rho-glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
