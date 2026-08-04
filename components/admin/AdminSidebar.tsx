@@ -41,8 +41,8 @@ export function AdminSidebar() {
   return (
     <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 bg-surface dark:border-slate-800 lg:flex">
       <div className="flex h-16 items-center gap-2 border-b border-slate-200 px-6 dark:border-slate-800">
-        <img src="/logo/rho-mark-dark.svg" alt="RHO" className="h-6 w-auto dark:hidden" />
-        <img src="/logo/rho-mark.svg" alt="RHO" className="hidden h-6 w-auto dark:block" />
+        <img src="/logo/yvann-mark-dark.svg" alt="Yvann" className="h-6 w-auto dark:hidden" />
+        <img src="/logo/yvann-mark.svg" alt="Yvann" className="hidden h-6 w-auto dark:block" />
         <span className="text-xs font-medium text-text-muted">Admin</span>
       </div>
 
@@ -56,7 +56,7 @@ export function AdminSidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-rho-blue-600 text-white"
+                  ? "bg-yvann-gold-600 text-white"
                   : "text-text-muted hover:bg-surface-2 hover:text-text"
               )}
             >

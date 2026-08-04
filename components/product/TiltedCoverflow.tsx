@@ -50,7 +50,7 @@ export function TiltedCoverflow({ products }: { products: MockProduct[] }) {
               className="w-40 shrink-0"
             >
               <Link href={`/produit/${p.slug}`}>
-                <div className="relative aspect-square overflow-hidden rounded-2xl bg-[var(--rho-white)] dark:bg-[var(--rho-ink-950)]">
+                <div className="relative aspect-square overflow-hidden rounded-2xl bg-[var(--yvann-cream)] dark:bg-[var(--yvann-black-950)]">
                   <img src={p.imageUrl} alt={p.name} className="h-full w-full object-cover" />
                   <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/60 to-transparent" />
                   <span className="absolute bottom-2 left-2 text-xs font-medium text-white">
@@ -79,7 +79,7 @@ export function TiltedCoverflow({ products }: { products: MockProduct[] }) {
             key={i}
             className={`h-1.5 w-1.5 rounded-full transition-colors ${
               i === index
-                ? "bg-[var(--rho-ink-950)] dark:bg-[var(--rho-white)]"
+                ? "bg-[var(--yvann-black-950)] dark:bg-[var(--yvann-cream)]"
                 : "bg-slate-300 dark:bg-slate-700"
             }`}
           />

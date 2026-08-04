@@ -15,7 +15,7 @@ export function ReviewsSection({
       <div className="flex items-center gap-4">
         <h2 className="text-xl font-semibold text-text">Avis clients</h2>
         <div className="flex items-center gap-1 text-sm text-text-muted">
-          <IconStar size={16} className="fill-rho-warning text-rho-warning" />
+          <IconStar size={16} className="fill-yvann-warning text-yvann-warning" />
           {avgRating.toFixed(1)} · {reviewCount || reviews.length} avis
         </div>
       </div>
@@ -31,14 +31,14 @@ export function ReviewsSection({
                     size={14}
                     className={
                       i < review.rating
-                        ? "fill-rho-warning text-rho-warning"
+                        ? "fill-yvann-warning text-yvann-warning"
                         : "text-slate-300 dark:text-slate-700"
                     }
                   />
                 ))}
               </div>
               {review.verifiedPurchase && (
-                <span className="flex items-center gap-1 text-xs text-rho-success">
+                <span className="flex items-center gap-1 text-xs text-yvann-success">
                   <IconCircleCheck size={13} /> Achat vérifié
                 </span>
               )}

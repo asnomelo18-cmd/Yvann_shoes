@@ -28,7 +28,7 @@ const SEED_PRODUCTS: SeedProduct[] = [
     basePrice: 65000,
     compareAtPrice: 85000,
     isNew: true,
-    colors: ["Noir", "Bleu RHO"],
+    colors: ["Noir", "Or Yvann"],
     sizes: [39, 40, 41, 42, 43, 44],
     description:
       "Une silhouette pensée pour accompagner chaque foulée, du bitume à la piste. Tige respirante, amorti réactif et maintien du talon renforcé.",
@@ -58,7 +58,7 @@ const SEED_PRODUCTS: SeedProduct[] = [
     basePrice: 72000,
     compareAtPrice: 90000,
     isNew: true,
-    colors: ["Cyan", "Noir"],
+    colors: ["Bronze", "Noir"],
     sizes: [36, 37, 38, 39, 40],
     description:
       "Tige tricotée extensible qui épouse la forme du pied, amorti léger pour les longues distances.",
@@ -88,7 +88,7 @@ const SEED_PRODUCTS: SeedProduct[] = [
     basePrice: 61000,
     compareAtPrice: 70000,
     isNew: false,
-    colors: ["Bleu RHO", "Gris ardoise"],
+    colors: ["Or Yvann", "Gris ardoise"],
     sizes: [36, 37, 38, 39],
     description:
       "Stabilité et accroche pour les séances intenses, maintien latéral renforcé.",
@@ -103,7 +103,7 @@ const SEED_PRODUCTS: SeedProduct[] = [
     basePrice: 32000,
     compareAtPrice: null,
     isNew: true,
-    colors: ["Cyan", "Blanc"],
+    colors: ["Bronze", "Blanc"],
     sizes: [28, 29, 30, 31, 32],
     description:
       "Légère et colorée, pensée pour l'énergie débordante des plus jeunes — fermeture scratch facile.",
@@ -133,7 +133,7 @@ const SEED_PRODUCTS: SeedProduct[] = [
     basePrice: 49000,
     compareAtPrice: null,
     isNew: false,
-    colors: ["Blanc", "Bleu RHO"],
+    colors: ["Blanc", "Or Yvann"],
     sizes: [36, 37, 38, 39, 40],
     description:
       "Confort urbain au quotidien, semelle intérieure moulante et tige respirante.",
@@ -178,8 +178,8 @@ async function main() {
     data: [
       { name: "Noir", hexCode: "#0B1220" },
       { name: "Blanc", hexCode: "#F8FAFC" },
-      { name: "Bleu RHO", hexCode: "#2563EB" },
-      { name: "Cyan", hexCode: "#06B6D4" },
+      { name: "Or Yvann", hexCode: "#C9A227" },
+      { name: "Bronze", hexCode: "#B08D57" },
       { name: "Gris ardoise", hexCode: "#64748B" },
     ],
     skipDuplicates: true,
@@ -209,7 +209,7 @@ async function main() {
       update: {},
       create: {
         slug: p.slug,
-        sku: `RHO-${p.slug.toUpperCase()}`,
+        sku: `YV-${p.slug.toUpperCase()}`,
         name: p.name,
         description: p.description,
         materials: "Tige en mesh technique et overlays synthétiques, semelle intermédiaire en mousse EVA.",
@@ -224,7 +224,7 @@ async function main() {
         isFeatured: p.isNew,
         avgRating: 4.3,
         reviewCount: 0,
-        categories: { create: categories.map((c) => ({ categoryId: c.id })) },
+        categories: { create: categories.map((c: { id: string }) => ({ categoryId: c.id })) },
         images: {
           create: [
             { url: `https://picsum.photos/seed/${p.slug}-1/800/800`, angle: "Face", position: 0 },

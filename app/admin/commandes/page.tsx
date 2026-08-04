@@ -17,12 +17,12 @@ const ORDER_STATUS_LABELS: Record<string, string> = {
 };
 
 const STATUS_TONE: Record<string, string> = {
-  EN_ATTENTE: "bg-rho-warning/15 text-rho-warning",
-  PAYEE: "bg-rho-blue-500/15 text-rho-blue-600",
-  PREPARATION: "bg-rho-cyan-500/15 text-rho-cyan-500",
-  EXPEDIEE: "bg-rho-blue-500/15 text-rho-blue-600",
-  LIVREE: "bg-rho-success/15 text-rho-success",
-  ANNULEE: "bg-rho-danger/15 text-rho-danger",
+  EN_ATTENTE: "bg-yvann-warning/15 text-yvann-warning",
+  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-600",
+  PREPARATION: "bg-yvann-bronze-500/15 text-yvann-bronze-500",
+  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-600",
+  LIVREE: "bg-yvann-success/15 text-yvann-success",
+  ANNULEE: "bg-yvann-danger/15 text-yvann-danger",
   REMBOURSEE: "bg-slate-400/15 text-text-muted",
 };
 
@@ -48,7 +48,7 @@ export default function AdminCommandesPage() {
             onClick={() => setTab(t.value)}
             className={cn(
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              tab === t.value ? "bg-rho-blue-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
+              tab === t.value ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
             )}
           >
             {t.label}
@@ -102,7 +102,7 @@ export default function AdminCommandesPage() {
                   <td className="px-4 py-3 text-right">
                     <Link
                       href={`/admin/commandes/${order.id}`}
-                      className="inline-flex items-center gap-1 rounded-full border border-slate-300 px-3 py-1.5 text-xs font-medium text-text hover:border-rho-blue-500 dark:border-slate-700"
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-300 px-3 py-1.5 text-xs font-medium text-text hover:border-yvann-gold-500 dark:border-slate-700"
                     >
                       <IconEye size={14} /> Voir
                     </Link>

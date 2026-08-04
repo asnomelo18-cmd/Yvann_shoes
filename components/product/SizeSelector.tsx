@@ -34,7 +34,7 @@ export function SizeSelector({
         <h3 className="text-sm font-semibold text-text">Pointure (EU)</h3>
         <Dialog.Root>
           <Dialog.Trigger asChild>
-            <button className="flex items-center gap-1 text-xs font-medium text-rho-blue-600 hover:underline">
+            <button className="flex items-center gap-1 text-xs font-medium text-yvann-gold-600 hover:underline">
               <IconRuler2 size={14} /> Guide des tailles
             </button>
           </Dialog.Trigger>

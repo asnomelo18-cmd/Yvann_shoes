@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function Hero() {
   return (
-    <section className="relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-rho-ink-950">
+    <section className="relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-yvann-black-950">
       <video
         autoPlay
         muted
@@ -17,7 +17,7 @@ export function Hero() {
         <source src="/videos/hero-shoe.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-rho-ink-950/80 via-transparent to-rho-ink-950/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-yvann-black-950/80 via-transparent to-yvann-black-950/10" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 sm:px-8 lg:px-12">
         <motion.h1
@@ -26,11 +26,11 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-2xl text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
         >
-          Chaque pas
+          La mode
           <br />
-          compte. <span className="text-white/60">Chaque paire</span>
+          à vos pieds. <span className="text-white/60">Chaque paire</span>
           <br />
-          <span className="text-white/60">est unique.</span>
+          <span className="text-white/60">a du caractère.</span>
         </motion.h1>
 
         <motion.p
@@ -39,8 +39,9 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           className="mt-6 max-w-md text-base text-white/80 sm:text-lg"
         >
-          RHO rassemble les meilleures sneakers, running et chaussures de ville
-          — livraison rapide et retours faciles sur toute votre commande.
+          Yvann Boutique rassemble les meilleures sneakers, running et
+          chaussures de ville — livraison rapide et retours faciles sur toute
+          votre commande.
         </motion.p>
 
         <motion.div
@@ -51,7 +52,7 @@ export function Hero() {
         >
           <Link
             href="/boutique"
-            className="rounded-full bg-rho-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-rho-blue-700"
+            className="rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700"
           >
             Voir la collection
           </Link>

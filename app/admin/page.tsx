@@ -22,10 +22,10 @@ export default function AdminOverviewPage() {
       </div>
 
       {pending.length > 0 && (
-        <div className="mt-8 rounded-2xl border border-rho-warning/30 bg-rho-warning/5 p-5">
+        <div className="mt-8 rounded-2xl border border-yvann-warning/30 bg-yvann-warning/5 p-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <IconClockHour4 className="text-rho-warning" size={22} />
+              <IconClockHour4 className="text-yvann-warning" size={22} />
               <div>
                 <p className="text-sm font-medium text-text">
                   {pending.length} paiement{pending.length > 1 ? "s" : ""} en attente de validation
@@ -37,7 +37,7 @@ export default function AdminOverviewPage() {
             </div>
             <Link
               href="/admin/paiements"
-              className="rounded-full bg-rho-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-rho-blue-700"
+              className="rounded-full bg-yvann-gold-600 px-4 py-2 text-sm font-semibold text-white hover:bg-yvann-gold-700"
             >
               Traiter maintenant
             </Link>

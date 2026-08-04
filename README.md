@@ -1,6 +1,6 @@
-# RHO — Boutique en ligne de chaussures
+# Yvann Boutique — La mode à vos pieds
 
-Site client + tableau de bord admin. Next.js 14 (App Router), TypeScript,
+Boutique en ligne de chaussures. Site client + tableau de bord admin.
 Tailwind, Prisma/PostgreSQL.
 
 ## État du projet

@@ -56,14 +56,14 @@ export default function BoutiquePage() {
                 <button
                   aria-label="Vue grille"
                   onClick={() => setView("grid")}
-                  className={`rounded-full p-1.5 ${view === "grid" ? "bg-rho-blue-600 text-white" : "text-text-muted"}`}
+                  className={`rounded-full p-1.5 ${view === "grid" ? "bg-yvann-gold-600 text-white" : "text-text-muted"}`}
                 >
                   <IconLayoutGrid size={16} />
                 </button>
                 <button
                   aria-label="Vue liste"
                   onClick={() => setView("list")}
-                  className={`rounded-full p-1.5 ${view === "list" ? "bg-rho-blue-600 text-white" : "text-text-muted"}`}
+                  className={`rounded-full p-1.5 ${view === "list" ? "bg-yvann-gold-600 text-white" : "text-text-muted"}`}
                 >
                   <IconList size={16} />
                 </button>
@@ -118,7 +118,7 @@ export default function BoutiquePage() {
             <div className="mt-10 flex justify-center">
               <button
                 onClick={() => setPage((p) => p + 1)}
-                className="rounded-full border border-slate-300 px-6 py-2.5 text-sm font-medium text-text hover:border-rho-blue-500 dark:border-slate-700"
+                className="rounded-full border border-slate-300 px-6 py-2.5 text-sm font-medium text-text hover:border-yvann-gold-500 dark:border-slate-700"
               >
                 Voir plus
               </button>
@@ -140,7 +140,7 @@ export default function BoutiquePage() {
             <FilterPanel filters={filters} onChange={updateFilters} />
             <button
               onClick={() => setMobileFiltersOpen(false)}
-              className="mt-8 w-full rounded-full bg-rho-blue-600 py-3 text-sm font-semibold text-white"
+              className="mt-8 w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white"
             >
               Voir les résultats
             </button>

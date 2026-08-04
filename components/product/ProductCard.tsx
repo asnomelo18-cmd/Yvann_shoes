@@ -33,12 +33,12 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
         />
         <div className="absolute left-2 top-2 flex flex-col gap-1">
           {product.isNew && (
-            <span className="rounded-full bg-rho-cyan-500 px-2 py-0.5 text-[11px] font-semibold text-rho-ink-950">
+            <span className="rounded-full bg-yvann-bronze-500 px-2 py-0.5 text-[11px] font-semibold text-yvann-black-950">
               Nouveau
             </span>
           )}
           {discountPct && (
-            <span className="rounded-full bg-rho-danger px-2 py-0.5 text-[11px] font-semibold text-white">
+            <span className="rounded-full bg-yvann-danger px-2 py-0.5 text-[11px] font-semibold text-white">
               -{discountPct}%
             </span>
           )}
@@ -46,7 +46,7 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
         <button
           aria-label="Ajouter aux favoris"
           onClick={(e) => e.preventDefault()}
-          className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-rho-ink-950 opacity-0 transition-opacity group-hover:opacity-100"
+          className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-yvann-black-950 opacity-0 transition-opacity group-hover:opacity-100"
         >
           <IconHeart size={16} />
         </button>
@@ -56,7 +56,7 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
         <p className="text-xs text-text-muted">{product.brand}</p>
         <h3 className="text-sm font-medium text-text">{product.name}</h3>
         <div className="mt-1 flex items-center gap-1 text-xs text-text-muted">
-          <IconStar size={13} className="fill-rho-warning text-rho-warning" />
+          <IconStar size={13} className="fill-yvann-warning text-yvann-warning" />
           {product.avgRating.toFixed(1)}
         </div>
         <div className="mt-1.5 flex items-center gap-2">

@@ -106,11 +106,11 @@ export function PaymentStep({
             className={cn(
               "flex flex-col items-center gap-2 rounded-2xl border p-4 text-center transition-colors",
               selected === m.value
-                ? "border-rho-blue-600 bg-rho-blue-500/5"
+                ? "border-yvann-gold-600 bg-yvann-gold-500/5"
                 : "border-slate-200 dark:border-slate-800"
             )}
           >
-            <m.icon size={22} className="text-rho-blue-600" />
+            <m.icon size={22} className="text-yvann-gold-600" />
             <span className="text-xs font-medium text-text">{m.label}</span>
           </button>
         ))}
@@ -146,10 +146,10 @@ export function PaymentStep({
             <input
               {...register("transactionReference")}
               placeholder="Ex. TXN123456789"
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             />
             {errors.transactionReference && (
-              <p className="mt-1 text-xs text-rho-danger">
+              <p className="mt-1 text-xs text-yvann-danger">
                 {errors.transactionReference.message}
               </p>
             )}
@@ -167,7 +167,7 @@ export function PaymentStep({
         </button>
         <button
           type="submit"
-          className="rounded-full bg-rho-blue-600 px-8 py-3 text-sm font-semibold text-white hover:bg-rho-blue-700"
+          className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
         >
           Valider ma commande
         </button>

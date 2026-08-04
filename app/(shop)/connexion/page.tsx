@@ -33,7 +33,7 @@ function ConnexionForm() {
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4 pt-20 sm:px-6">
       <h1 className="text-2xl font-semibold tracking-tight text-text">Se connecter</h1>
-      <p className="mt-1 text-sm text-text-muted">Accédez à votre compte RHO.</p>
+      <p className="mt-1 text-sm text-text-muted">Accédez à votre compte Yvann.</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
         <div>
@@ -41,9 +41,9 @@ function ConnexionForm() {
           <input
             type="email"
             {...register("email")}
-            className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+            className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
           />
-          {errors.email && <p className="mt-1 text-xs text-rho-danger">{errors.email.message}</p>}
+          {errors.email && <p className="mt-1 text-xs text-yvann-danger">{errors.email.message}</p>}
         </div>
 
         <div>
@@ -51,24 +51,24 @@ function ConnexionForm() {
             <label className="mb-1.5 block text-xs font-medium text-text-muted">
               Mot de passe
             </label>
-            <Link href="/mot-de-passe-oublie" className="text-xs text-rho-blue-600 hover:underline">
+            <Link href="/mot-de-passe-oublie" className="text-xs text-yvann-gold-600 hover:underline">
               Mot de passe oublié ?
             </Link>
           </div>
           <input
             type="password"
             {...register("password")}
-            className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+            className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
           />
           {errors.password && (
-            <p className="mt-1 text-xs text-rho-danger">{errors.password.message}</p>
+            <p className="mt-1 text-xs text-yvann-danger">{errors.password.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={login.isPending}
-          className="w-full rounded-full bg-rho-blue-600 py-3 text-sm font-semibold text-white hover:bg-rho-blue-700 disabled:opacity-60"
+          className="w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700 disabled:opacity-60"
         >
           {login.isPending ? "Connexion..." : "Se connecter"}
         </button>
@@ -76,7 +76,7 @@ function ConnexionForm() {
 
       <p className="mt-6 text-center text-sm text-text-muted">
         Pas encore de compte ?{" "}
-        <Link href="/inscription" className="font-medium text-rho-blue-600 hover:underline">
+        <Link href="/inscription" className="font-medium text-yvann-gold-600 hover:underline">
           Créer un compte
         </Link>
       </p>

@@ -21,8 +21,8 @@ export function Stepper({ steps, currentIndex }: { steps: StepperStep[]; current
               <div
                 className={cn(
                   "flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors",
-                  isDone && "border-rho-blue-600 bg-rho-blue-600 text-white",
-                  isActive && "border-rho-blue-600 text-rho-blue-600",
+                  isDone && "border-yvann-gold-600 bg-yvann-gold-600 text-white",
+                  isActive && "border-yvann-gold-600 text-yvann-gold-600",
                   !isDone && !isActive && "border-slate-300 text-text-muted dark:border-slate-700"
                 )}
               >
@@ -40,7 +40,7 @@ export function Stepper({ steps, currentIndex }: { steps: StepperStep[]; current
             {i < steps.length - 1 && (
               <div className="mx-2 h-0.5 flex-1 bg-slate-200 dark:bg-slate-700">
                 <motion.div
-                  className="h-0.5 bg-rho-blue-600"
+                  className="h-0.5 bg-yvann-gold-600"
                   initial={false}
                   animate={{ width: isDone ? "100%" : "0%" }}
                   transition={{ duration: 0.3 }}

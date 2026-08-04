@@ -37,7 +37,7 @@ export function AdminTopbar() {
         </div>
         <button aria-label="Notifications" className="relative rounded-full p-2 text-text-muted hover:text-text">
           <IconBell size={19} />
-          <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-rho-danger" />
+          <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-yvann-danger" />
         </button>
         <button aria-label="Profil" className="rounded-full text-text-muted hover:text-text">
           <IconUserCircle size={26} />

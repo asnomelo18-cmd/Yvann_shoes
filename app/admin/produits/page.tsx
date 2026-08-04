@@ -47,7 +47,7 @@ export default function AdminProduitsPage() {
 
         <Link
           href="/admin/produits/nouveau"
-          className="flex items-center gap-2 rounded-full bg-rho-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-rho-blue-700"
+          className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-4 py-2 text-sm font-semibold text-white hover:bg-yvann-gold-700"
         >
           <IconPlus size={16} /> Ajouter un produit
         </Link>
@@ -86,7 +86,7 @@ export default function AdminProduitsPage() {
                     <span
                       className={cn(
                         "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium",
-                        lowStock ? "bg-rho-warning/15 text-rho-warning" : "bg-rho-success/15 text-rho-success"
+                        lowStock ? "bg-yvann-warning/15 text-yvann-warning" : "bg-yvann-success/15 text-yvann-success"
                       )}
                     >
                       {lowStock && <IconAlertTriangle size={12} />}
@@ -97,7 +97,7 @@ export default function AdminProduitsPage() {
                     <span
                       className={cn(
                         "rounded-full px-2.5 py-1 text-xs font-medium",
-                        p.isNew ? "bg-rho-cyan-500/15 text-rho-cyan-500" : "bg-slate-400/15 text-text-muted"
+                        p.isNew ? "bg-yvann-bronze-500/15 text-yvann-bronze-500" : "bg-slate-400/15 text-text-muted"
                       )}
                     >
                       {p.isNew ? "Nouveau" : "Publié"}
@@ -106,7 +106,7 @@ export default function AdminProduitsPage() {
                   <td className="px-4 py-3 text-right">
                     <Link
                       href={`/admin/produits/${p.id}`}
-                      className="inline-flex items-center gap-1 rounded-full border border-slate-300 px-3 py-1.5 text-xs font-medium text-text hover:border-rho-blue-500 dark:border-slate-700"
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-300 px-3 py-1.5 text-xs font-medium text-text hover:border-yvann-gold-500 dark:border-slate-700"
                     >
                       <IconEdit size={13} /> Modifier
                     </Link>

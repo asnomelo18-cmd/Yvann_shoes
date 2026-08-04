@@ -69,7 +69,7 @@ export default function AdminOrderDetailPage() {
                 onClick={() => updateOrderStatus(s)}
                 className={cn(
                   "flex h-8 flex-1 items-center justify-center rounded-full text-xs font-medium transition-colors",
-                  i <= currentStepIndex ? "bg-rho-blue-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
+                  i <= currentStepIndex ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
                 )}
               >
                 {ORDER_STATUS_LABELS[s]}

@@ -28,7 +28,7 @@ const COLUMNS = [
     ],
   },
   {
-    title: "RHO",
+    title: "La marque",
     links: [
       { label: "À propos", href: "/a-propos" },
       { label: "Blog", href: "/blog" },
@@ -51,14 +51,14 @@ export function Footer() {
     <footer className="border-t border-slate-200 bg-surface dark:border-slate-800">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-16 sm:px-8 lg:grid-cols-5 lg:px-12">
         <div className="col-span-2 lg:col-span-2">
-          <img src="/logo/rho-mark-dark.svg" alt="RHO" className="h-7 w-auto dark:hidden" />
+          <img src="/logo/yvann-mark-dark.svg" alt="Yvann" className="h-7 w-auto dark:hidden" />
           <img
-            src="/logo/rho-mark.svg"
-            alt="RHO"
+            src="/logo/yvann-mark.svg"
+            alt="Yvann"
             className="hidden h-7 w-auto dark:block"
           />
           <p className="mt-4 max-w-xs text-sm text-text-muted">
-            La boutique en ligne de chaussures sneakers, running et ville.
+            La mode à vos pieds — sneakers, running et chaussures de ville.
           </p>
           <div className="mt-5 flex gap-3">
             {SOCIALS.map(({ icon: Icon, href, label }) => (
@@ -68,7 +68,7 @@ export function Footer() {
                 aria-label={label}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-slate-300 p-2 text-text-muted transition-colors hover:border-rho-blue-500 hover:text-rho-blue-600 dark:border-slate-700"
+                className="rounded-full border border-slate-300 p-2 text-text-muted transition-colors hover:border-yvann-gold-500 hover:text-yvann-gold-600 dark:border-slate-700"
               >
                 <Icon size={18} />
               </a>
@@ -96,7 +96,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-slate-200 px-6 py-6 text-center text-xs text-text-muted dark:border-slate-800">
-        © {new Date().getFullYear()} RHO. Tous droits réservés.
+        © {new Date().getFullYear()} Yvann. Tous droits réservés.
       </div>
     </footer>
   );

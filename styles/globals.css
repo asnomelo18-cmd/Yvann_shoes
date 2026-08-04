@@ -10,55 +10,55 @@
 }
 
 :root {
-  /* Neutres bleu-gris (base UI) */
-  --rho-ink-950: #0b1220;
-  --rho-ink-900: #111827;
-  --rho-slate-800: #1e293b;
-  --rho-slate-700: #334155;
-  --rho-slate-600: #475569;
-  --rho-slate-500: #64748b;
-  --rho-slate-400: #94a3b8;
-  --rho-slate-300: #cbd5e1;
-  --rho-slate-200: #e2e8f0;
-  --rho-slate-100: #f1f5f9;
-  --rho-white: #f8fafc;
-  --rho-white-pure: #ffffff;
+  /* Neutres noir/charbon (base UI) */
+  --yvann-black-950: #0a0a0b;
+  --yvann-black-900: #141416;
+  --yvann-charcoal-800: #1f1f22;
+  --yvann-charcoal-700: #2c2c30;
+  --yvann-charcoal-600: #3f3f45;
+  --yvann-charcoal-500: #5c5c63;
+  --yvann-charcoal-400: #86868d;
+  --yvann-charcoal-300: #b3b3b8;
+  --yvann-charcoal-200: #d9d9dc;
+  --yvann-charcoal-100: #ede9e3;
+  --yvann-cream: #f5f1e8;
+  --yvann-white-pure: #ffffff;
 
-  /* Accent vif — bleu RHO */
-  --rho-blue-700: #1d4ed8;
-  --rho-blue-600: #2563eb; /* couleur de marque principale */
-  --rho-blue-500: #3b82f6;
-  --rho-blue-400: #60a5fa;
+  /* Accent principal — or (identité de la marque) */
+  --yvann-gold-700: #96741f;
+  --yvann-gold-600: #c9a227; /* couleur de marque principale */
+  --yvann-gold-500: #d4af37;
+  --yvann-gold-400: #e4c767;
 
-  /* Accent secondaire vif — cyan */
-  --rho-cyan-500: #06b6d4;
-  --rho-cyan-400: #22d3ee;
+  /* Accent secondaire — bronze (badges, highlights) */
+  --yvann-bronze-500: #b08d57;
+  --yvann-bronze-400: #c9a96e;
 
   /* États */
-  --rho-success: #10b981;
-  --rho-warning: #f59e0b;
-  --rho-danger: #ef4444;
+  --yvann-success: #2f9e5b;
+  --yvann-warning: #d4af37;
+  --yvann-danger: #c0392b;
 
   /* Sémantique — light par défaut */
-  --rho-bg: var(--rho-white);
-  --rho-surface: var(--rho-white-pure);
-  --rho-surface-2: var(--rho-slate-100);
-  --rho-text: var(--rho-ink-950);
-  --rho-text-muted: var(--rho-slate-500);
+  --yvann-bg: var(--yvann-cream);
+  --yvann-surface: var(--yvann-white-pure);
+  --yvann-surface-2: var(--yvann-charcoal-100);
+  --yvann-text: var(--yvann-black-950);
+  --yvann-text-muted: var(--yvann-charcoal-500);
 
-  --rho-glass-bg: rgba(15, 23, 42, 0.06);
-  --rho-glass-border: rgba(15, 23, 42, 0.1);
+  --yvann-glass-bg: rgba(10, 10, 11, 0.06);
+  --yvann-glass-border: rgba(201, 162, 39, 0.25);
 }
 
 .dark {
-  --rho-bg: var(--rho-ink-950);
-  --rho-surface: var(--rho-ink-900);
-  --rho-surface-2: var(--rho-slate-800);
-  --rho-text: var(--rho-white);
-  --rho-text-muted: var(--rho-slate-400);
+  --yvann-bg: var(--yvann-black-950);
+  --yvann-surface: var(--yvann-black-900);
+  --yvann-surface-2: var(--yvann-charcoal-800);
+  --yvann-text: var(--yvann-cream);
+  --yvann-text-muted: var(--yvann-charcoal-300);
 
-  --rho-glass-bg: rgba(255, 255, 255, 0.08);
-  --rho-glass-border: rgba(255, 255, 255, 0.14);
+  --yvann-glass-bg: rgba(255, 255, 255, 0.06);
+  --yvann-glass-border: rgba(201, 162, 39, 0.3);
 }
 
 @layer base {
@@ -66,8 +66,8 @@
     scroll-behavior: smooth;
   }
   body {
-    background-color: var(--rho-bg);
-    color: var(--rho-text);
+    background-color: var(--yvann-bg);
+    color: var(--yvann-text);
     font-family:
       "Helvetica Now Text",
       -apple-system,
@@ -80,15 +80,15 @@
   h2,
   h3,
   h4 {
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     font-weight: 600;
   }
 }
 
 @layer components {
   .liquid-glass {
-    background: var(--rho-glass-bg);
-    border: 1px solid var(--rho-glass-border);
+    background: var(--yvann-glass-bg);
+    border: 1px solid var(--yvann-glass-border);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }

@@ -95,7 +95,7 @@ export async function POST(request: Request) {
 
       const createdOrder = await tx.order.create({
         data: {
-          orderNumber: `RHO-${Date.now().toString().slice(-8)}`,
+          orderNumber: `YV-${Date.now().toString().slice(-8)}`,
           userId: user.id,
           status: "EN_ATTENTE",
           shippingAddressId: shippingAddress.id,

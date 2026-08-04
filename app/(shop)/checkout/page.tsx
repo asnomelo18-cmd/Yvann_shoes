@@ -48,7 +48,7 @@ export default function CheckoutPage() {
         <p className="text-text-muted">Connectez-vous pour finaliser votre commande.</p>
         <button
           onClick={() => router.push("/connexion?next=/checkout")}
-          className="mt-4 rounded-full bg-rho-blue-600 px-6 py-3 text-sm font-semibold text-white"
+          className="mt-4 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white"
         >
           Se connecter
         </button>
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
         <p className="text-text-muted">Votre panier est vide.</p>
         <button
           onClick={() => router.push("/boutique")}
-          className="mt-4 rounded-full bg-rho-blue-600 px-6 py-3 text-sm font-semibold text-white"
+          className="mt-4 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white"
         >
           Aller à la boutique
         </button>

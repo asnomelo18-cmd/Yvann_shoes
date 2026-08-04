@@ -16,7 +16,7 @@ export interface MockOrderPayment {
 export const MOCK_PAYMENTS: MockOrderPayment[] = [
   {
     id: "p1",
-    orderNumber: "RHO-84213590",
+    orderNumber: "YV-84213590",
     customerName: "Aïcha Koné",
     amount: 67500,
     method: "ORANGE_MONEY",
@@ -26,7 +26,7 @@ export const MOCK_PAYMENTS: MockOrderPayment[] = [
   },
   {
     id: "p2",
-    orderNumber: "RHO-84209981",
+    orderNumber: "YV-84209981",
     customerName: "Moussa Diabaté",
     amount: 84000,
     method: "WAVE",
@@ -36,7 +36,7 @@ export const MOCK_PAYMENTS: MockOrderPayment[] = [
   },
   {
     id: "p3",
-    orderNumber: "RHO-84190213",
+    orderNumber: "YV-84190213",
     customerName: "Fatou Sanogo",
     amount: 45000,
     method: "ESPECES",
@@ -46,7 +46,7 @@ export const MOCK_PAYMENTS: MockOrderPayment[] = [
   },
   {
     id: "p4",
-    orderNumber: "RHO-84172233",
+    orderNumber: "YV-84172233",
     customerName: "Yao Kouassi",
     amount: 72000,
     method: "MTN_MONEY",
@@ -56,7 +56,7 @@ export const MOCK_PAYMENTS: MockOrderPayment[] = [
   },
   {
     id: "p5",
-    orderNumber: "RHO-84150098",
+    orderNumber: "YV-84150098",
     customerName: "Awa Traoré",
     amount: 58000,
     method: "VIREMENT",

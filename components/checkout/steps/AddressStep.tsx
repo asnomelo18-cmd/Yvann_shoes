@@ -41,10 +41,10 @@ export function AddressStep({
             </label>
             <input
               {...register(field.name)}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             />
             {errors[field.name] && (
-              <p className="mt-1 text-xs text-rho-danger">{errors[field.name]?.message}</p>
+              <p className="mt-1 text-xs text-yvann-danger">{errors[field.name]?.message}</p>
             )}
           </div>
         ))}
@@ -52,7 +52,7 @@ export function AddressStep({
 
       <button
         type="submit"
-        className="mt-8 rounded-full bg-rho-blue-600 px-8 py-3 text-sm font-semibold text-white hover:bg-rho-blue-700"
+        className="mt-8 rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
       >
         Continuer vers la livraison
       </button>

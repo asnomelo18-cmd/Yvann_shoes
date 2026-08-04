@@ -30,7 +30,7 @@ export function ProductGallery({ images }: { images: { url: string; angle: strin
             key={img.angle}
             onClick={() => setActiveIndex(i)}
             className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-colors ${
-              i === activeIndex ? "border-rho-blue-600" : "border-transparent"
+              i === activeIndex ? "border-yvann-gold-600" : "border-transparent"
             }`}
             aria-label={`Voir l'angle ${img.angle}`}
           >

@@ -48,7 +48,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
       <button
         aria-label="Retirer du panier"
         onClick={() => removeLine(line.variantId)}
-        className="self-start text-text-muted hover:text-rho-danger"
+        className="self-start text-text-muted hover:text-yvann-danger"
       >
         <IconTrash size={16} />
       </button>

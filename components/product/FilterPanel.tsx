@@ -96,10 +96,10 @@ export function FilterPanel({
             onValueChange={(v) => update("priceRange", v as [number, number])}
           >
             <Slider.Track className="relative h-1 grow rounded-full bg-slate-200 dark:bg-slate-700">
-              <Slider.Range className="absolute h-full rounded-full bg-rho-blue-600" />
+              <Slider.Range className="absolute h-full rounded-full bg-yvann-gold-600" />
             </Slider.Track>
-            <Slider.Thumb className="block h-4 w-4 rounded-full bg-rho-blue-600 shadow focus:outline-none focus:ring-2 focus:ring-rho-blue-400" />
-            <Slider.Thumb className="block h-4 w-4 rounded-full bg-rho-blue-600 shadow focus:outline-none focus:ring-2 focus:ring-rho-blue-400" />
+            <Slider.Thumb className="block h-4 w-4 rounded-full bg-yvann-gold-600 shadow focus:outline-none focus:ring-2 focus:ring-yvann-gold-400" />
+            <Slider.Thumb className="block h-4 w-4 rounded-full bg-yvann-gold-600 shadow focus:outline-none focus:ring-2 focus:ring-yvann-gold-400" />
           </Slider.Root>
           <div className="mt-2 flex justify-between text-xs text-text-muted">
             <span>{formatPrice(filters.priceRange[0])}</span>

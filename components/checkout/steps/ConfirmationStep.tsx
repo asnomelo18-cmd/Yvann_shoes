@@ -36,7 +36,7 @@ export function ConfirmationStep({
 }) {
   return (
     <div className="max-w-xl text-center">
-      <IconClockHour4 size={48} className="mx-auto text-rho-warning" />
+      <IconClockHour4 size={48} className="mx-auto text-yvann-warning" />
       <h2 className="mt-4 text-2xl font-semibold text-text">Commande enregistrée</h2>
       <p className="mt-2 text-sm text-text-muted">
         Commande <span className="font-medium text-text">#{orderNumber}</span> — en
@@ -84,7 +84,7 @@ export function ConfirmationStep({
         </Link>
         <Link
           href="/boutique"
-          className="rounded-full bg-rho-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-rho-blue-700"
+          className="rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
         >
           Continuer mes achats
         </Link>

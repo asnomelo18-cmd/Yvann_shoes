@@ -23,10 +23,10 @@ const METHOD_LABELS: Record<string, string> = {
 };
 
 const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
-  EN_ATTENTE: { label: "En attente", className: "bg-rho-warning/15 text-rho-warning" },
-  VALIDE: { label: "Validé", className: "bg-rho-success/15 text-rho-success" },
-  ECHOUE: { label: "Échoué", className: "bg-rho-danger/15 text-rho-danger" },
-  REMBOURSE: { label: "Remboursé", className: "bg-rho-slate-500/15 text-text-muted" },
+  EN_ATTENTE: { label: "En attente", className: "bg-yvann-warning/15 text-yvann-warning" },
+  VALIDE: { label: "Validé", className: "bg-yvann-success/15 text-yvann-success" },
+  ECHOUE: { label: "Échoué", className: "bg-yvann-danger/15 text-yvann-danger" },
+  REMBOURSE: { label: "Remboursé", className: "bg-yvann-charcoal-500/15 text-text-muted" },
 };
 
 const TABS: { value: string; label: string }[] = [
@@ -94,7 +94,7 @@ export default function AdminPaiementsPage() {
             onClick={() => setTab(t.value)}
             className={cn(
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              tab === t.value ? "bg-rho-blue-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
+              tab === t.value ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
             )}
           >
             {t.label}
@@ -164,13 +164,13 @@ export default function AdminPaiementsPage() {
                       <div className="flex justify-end gap-2">
                         <button
                           onClick={() => setPendingAction({ id: p.id, action: "VALIDE" })}
-                          className="rounded-full bg-rho-success/15 px-3 py-1.5 text-xs font-medium text-rho-success hover:bg-rho-success/25"
+                          className="rounded-full bg-yvann-success/15 px-3 py-1.5 text-xs font-medium text-yvann-success hover:bg-yvann-success/25"
                         >
                           Valider
                         </button>
                         <button
                           onClick={() => setPendingAction({ id: p.id, action: "ECHOUE" })}
-                          className="rounded-full bg-rho-danger/15 px-3 py-1.5 text-xs font-medium text-rho-danger hover:bg-rho-danger/25"
+                          className="rounded-full bg-yvann-danger/15 px-3 py-1.5 text-xs font-medium text-yvann-danger hover:bg-yvann-danger/25"
                         >
                           Rejeter
                         </button>
@@ -209,7 +209,7 @@ export default function AdminPaiementsPage() {
                   onClick={applyAction}
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-semibold text-white",
-                    pendingAction?.action === "VALIDE" ? "bg-rho-success" : "bg-rho-danger"
+                    pendingAction?.action === "VALIDE" ? "bg-yvann-success" : "bg-yvann-danger"
                   )}
                 >
                   Confirmer

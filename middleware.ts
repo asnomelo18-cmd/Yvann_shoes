@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/admin")) {
-    const token = request.cookies.get("rho_access_token")?.value;
+    const token = request.cookies.get("yvann_access_token")?.value;
     if (!token) {
       return NextResponse.redirect(new URL("/connexion", request.url));
     }

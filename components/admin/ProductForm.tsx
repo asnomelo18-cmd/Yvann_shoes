@@ -105,16 +105,16 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
             <label className="mb-1.5 block text-xs font-medium text-text-muted">Nom du modèle</label>
             <input
               {...register("name")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             />
-            {errors.name && <p className="mt-1 text-xs text-rho-danger">{errors.name.message}</p>}
+            {errors.name && <p className="mt-1 text-xs text-yvann-danger">{errors.name.message}</p>}
           </div>
 
           <div>
             <label className="mb-1.5 block text-xs font-medium text-text-muted">Marque</label>
             <select
               {...register("brand")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             >
               <option value="">Choisir...</option>
               {BRANDS.map((b) => (
@@ -123,14 +123,14 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
                 </option>
               ))}
             </select>
-            {errors.brand && <p className="mt-1 text-xs text-rho-danger">{errors.brand.message}</p>}
+            {errors.brand && <p className="mt-1 text-xs text-yvann-danger">{errors.brand.message}</p>}
           </div>
 
           <div>
             <label className="mb-1.5 block text-xs font-medium text-text-muted">Catégorie</label>
             <select
               {...register("category")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             >
               {CATEGORY_OPTIONS.map((c) => (
                 <option key={c.value} value={c.value}>
@@ -144,7 +144,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
             <label className="mb-1.5 block text-xs font-medium text-text-muted">Genre</label>
             <select
               {...register("gender")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             >
               {GENDER_OPTIONS.map((g) => (
                 <option key={g.value} value={g.value}>
@@ -158,7 +158,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
             <label className="mb-1.5 block text-xs font-medium text-text-muted">Usage</label>
             <select
               {...register("usage")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             >
               {USAGE_OPTIONS.map((u) => (
                 <option key={u.value} value={u.value}>
@@ -173,10 +173,10 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
             <textarea
               {...register("description")}
               rows={4}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             />
             {errors.description && (
-              <p className="mt-1 text-xs text-rho-danger">{errors.description.message}</p>
+              <p className="mt-1 text-xs text-yvann-danger">{errors.description.message}</p>
             )}
           </div>
 
@@ -185,10 +185,10 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
             <input
               type="number"
               {...register("basePrice")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             />
             {errors.basePrice && (
-              <p className="mt-1 text-xs text-rho-danger">{errors.basePrice.message}</p>
+              <p className="mt-1 text-xs text-yvann-danger">{errors.basePrice.message}</p>
             )}
           </div>
 
@@ -199,7 +199,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
             <input
               type="number"
               {...register("compareAtPrice")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             />
           </div>
         </div>
@@ -239,7 +239,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
         <div className="flex gap-3">
           <button
             type="submit"
-            className="rounded-full bg-rho-blue-600 px-8 py-3 text-sm font-semibold text-white hover:bg-rho-blue-700"
+            className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
           >
             {isEditing ? "Enregistrer les modifications" : "Créer le produit"}
           </button>
@@ -258,7 +258,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
               toast.success("Produit supprimé.");
               router.push("/admin/produits");
             }}
-            className="flex items-center gap-1.5 text-sm font-medium text-rho-danger hover:underline"
+            className="flex items-center gap-1.5 text-sm font-medium text-yvann-danger hover:underline"
           >
             <IconTrash size={15} /> Supprimer
           </button>

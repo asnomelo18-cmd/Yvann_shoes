@@ -11,7 +11,7 @@ export function Newsletter() {
     e.preventDefault();
     if (!email) return;
     // TODO: brancher sur services/newsletter.ts (appel API)
-    toast.success("Merci ! Vous êtes inscrit à la newsletter RHO.");
+    toast.success("Merci ! Vous êtes inscrit à la newsletter Yvann.");
     setEmail("");
   }
 
@@ -40,7 +40,7 @@ export function Newsletter() {
           <button
             type="submit"
             aria-label="S'inscrire"
-            className="flex items-center gap-2 rounded-full bg-rho-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-rho-blue-700"
+            className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700"
           >
             <IconSend2 size={16} />
           </button>

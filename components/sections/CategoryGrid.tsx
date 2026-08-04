@@ -28,9 +28,9 @@ export function CategoryGrid() {
           <Link
             key={label}
             href={href}
-            className="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-surface px-4 py-8 transition-colors hover:border-rho-blue-500 dark:border-slate-700"
+            className="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-surface px-4 py-8 transition-colors hover:border-yvann-gold-500 dark:border-slate-700"
           >
-            <Icon size={28} className="text-rho-blue-600" />
+            <Icon size={28} className="text-yvann-gold-600" />
             <span className="text-sm font-medium text-text">{label}</span>
           </Link>
         ))}

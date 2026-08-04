@@ -51,13 +51,13 @@ export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
 export const MOCK_ORDERS: MockOrder[] = [
   {
     id: "o1",
-    orderNumber: "RHO-84213590",
+    orderNumber: "YV-84213590",
     customerName: "Aïcha Koné",
     customerEmail: "aicha.kone@example.com",
     customerPhone: "07 01 23 45 67",
     status: "EN_ATTENTE",
     items: [
-      { productName: "Aero Runner 01", imageUrl: "/images/products/aero-runner-01.jpg", size: 40, color: "Bleu RHO", quantity: 1, unitPrice: 65000 },
+      { productName: "Aero Runner 01", imageUrl: "/images/products/aero-runner-01.jpg", size: 40, color: "Or Yvann", quantity: 1, unitPrice: 65000 },
       { productName: "Trainer Grip W", imageUrl: "/images/products/trainer-grip-w.jpg", size: 38, color: "Gris ardoise", quantity: 1, unitPrice: 2500 },
     ],
     shippingAddress: "Riviera Palmeraie, Abidjan, Côte d'Ivoire",
@@ -66,7 +66,7 @@ export const MOCK_ORDERS: MockOrder[] = [
   },
   {
     id: "o2",
-    orderNumber: "RHO-84209981",
+    orderNumber: "YV-84209981",
     customerName: "Moussa Diabaté",
     customerEmail: "moussa.diabate@example.com",
     customerPhone: "05 09 87 65 43",
@@ -80,13 +80,13 @@ export const MOCK_ORDERS: MockOrder[] = [
   },
   {
     id: "o3",
-    orderNumber: "RHO-84172233",
+    orderNumber: "YV-84172233",
     customerName: "Yao Kouassi",
     customerEmail: "yao.kouassi@example.com",
     customerPhone: "01 22 33 44 55",
     status: "PREPARATION",
     items: [
-      { productName: "Trainer Grip W", imageUrl: "/images/products/trainer-grip-w.jpg", size: 37, color: "Bleu RHO", quantity: 2, unitPrice: 61000 },
+      { productName: "Trainer Grip W", imageUrl: "/images/products/trainer-grip-w.jpg", size: 37, color: "Or Yvann", quantity: 2, unitPrice: 61000 },
     ],
     shippingAddress: "Bouaké, Vallée du Bandama, Côte d'Ivoire",
     paymentMethod: "MTN Money",
@@ -94,7 +94,7 @@ export const MOCK_ORDERS: MockOrder[] = [
   },
   {
     id: "o4",
-    orderNumber: "RHO-84150098",
+    orderNumber: "YV-84150098",
     customerName: "Awa Traoré",
     customerEmail: "awa.traore@example.com",
     customerPhone: "07 44 55 66 77",
@@ -108,7 +108,7 @@ export const MOCK_ORDERS: MockOrder[] = [
   },
   {
     id: "o5",
-    orderNumber: "RHO-84098211",
+    orderNumber: "YV-84098211",
     customerName: "Kader Ouattara",
     customerEmail: "kader.ouattara@example.com",
     customerPhone: "01 90 80 70 60",

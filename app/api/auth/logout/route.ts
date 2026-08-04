@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 
 export async function POST() {
-  const refreshToken = cookies().get("rho_refresh_token")?.value;
+  const refreshToken = cookies().get("yvann_refresh_token")?.value;
   if (refreshToken) {
     await prisma.refreshToken.updateMany({
       where: { token: refreshToken },
@@ -12,7 +12,7 @@ export async function POST() {
   }
 
   const response = NextResponse.json({ ok: true });
-  response.cookies.delete("rho_access_token");
-  response.cookies.delete("rho_refresh_token");
+  response.cookies.delete("yvann_access_token");
+  response.cookies.delete("yvann_refresh_token");
   return response;
 }

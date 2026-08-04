@@ -62,7 +62,7 @@ export function OrderSummary({
           <dd>{formatPrice(tax)}</dd>
         </div>
         {discount > 0 && (
-          <div className="flex justify-between text-rho-success">
+          <div className="flex justify-between text-yvann-success">
             <dt>Réduction</dt>
             <dd>-{formatPrice(discount)}</dd>
           </div>
@@ -76,7 +76,7 @@ export function OrderSummary({
       <button
         onClick={onCta}
         disabled={subtotal === 0}
-        className="mt-5 w-full rounded-full bg-rho-blue-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-rho-blue-700 disabled:opacity-40"
+        className="mt-5 w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700 disabled:opacity-40"
       >
         {ctaLabel}
       </button>

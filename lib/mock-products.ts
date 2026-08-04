@@ -32,7 +32,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     avgRating: 4.6,
     colors: [
       { name: "Noir", hex: "#0B1220" },
-      { name: "Bleu RHO", hex: "#2563EB" },
+      { name: "Or Yvann", hex: "#C9A227" },
     ],
     availableSizes: [39, 40, 41, 42, 43, 44],
   },
@@ -69,7 +69,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     isNew: true,
     avgRating: 4.8,
     colors: [
-      { name: "Cyan", hex: "#06B6D4" },
+      { name: "Bronze", hex: "#B08D57" },
       { name: "Noir", hex: "#0B1220" },
     ],
     availableSizes: [36, 37, 38, 39, 40],
@@ -104,7 +104,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     isNew: false,
     avgRating: 4.4,
     colors: [
-      { name: "Bleu RHO", hex: "#2563EB" },
+      { name: "Or Yvann", hex: "#C9A227" },
       { name: "Gris ardoise", hex: "#64748B" },
     ],
     availableSizes: [36, 37, 38, 39],
@@ -123,7 +123,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     isNew: true,
     avgRating: 4.5,
     colors: [
-      { name: "Cyan", hex: "#06B6D4" },
+      { name: "Bronze", hex: "#B08D57" },
       { name: "Blanc", hex: "#F8FAFC" },
     ],
     availableSizes: [28, 29, 30, 31, 32],
@@ -159,7 +159,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     avgRating: 4.2,
     colors: [
       { name: "Blanc", hex: "#F8FAFC" },
-      { name: "Bleu RHO", hex: "#2563EB" },
+      { name: "Or Yvann", hex: "#C9A227" },
     ],
     availableSizes: [36, 37, 38, 39, 40],
   },
@@ -170,7 +170,7 @@ export const ALL_SIZES = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
 export const ALL_COLORS = [
   { name: "Noir", hex: "#0B1220" },
   { name: "Blanc", hex: "#F8FAFC" },
-  { name: "Bleu RHO", hex: "#2563EB" },
-  { name: "Cyan", hex: "#06B6D4" },
+  { name: "Or Yvann", hex: "#C9A227" },
+  { name: "Bronze", hex: "#B08D57" },
   { name: "Gris ardoise", hex: "#64748B" },
 ];

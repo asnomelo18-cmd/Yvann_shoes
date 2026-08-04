@@ -49,7 +49,7 @@ export function DeliveryStep({
             className={cn(
               "flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition-colors",
               selected === opt.value
-                ? "border-rho-blue-600 bg-rho-blue-500/5"
+                ? "border-yvann-gold-600 bg-yvann-gold-500/5"
                 : "border-slate-200 dark:border-slate-800"
             )}
           >
@@ -59,7 +59,7 @@ export function DeliveryStep({
               checked={selected === opt.value}
               onChange={() => setValue("method", opt.value)}
             />
-            <opt.icon size={22} className="text-rho-blue-600" />
+            <opt.icon size={22} className="text-yvann-gold-600" />
             <div className="flex-1">
               <p className="text-sm font-medium text-text">{opt.label}</p>
               <p className="text-xs text-text-muted">{opt.detail}</p>
@@ -79,7 +79,7 @@ export function DeliveryStep({
         </button>
         <button
           type="submit"
-          className="rounded-full bg-rho-blue-600 px-8 py-3 text-sm font-semibold text-white hover:bg-rho-blue-700"
+          className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
         >
           Continuer vers le paiement
         </button>

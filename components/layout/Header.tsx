@@ -61,7 +61,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <nav className="liquid-glass flex w-full items-center justify-between rounded-full px-4 py-2.5 sm:px-6">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo/rho-mark.svg" alt="RHO" className="h-7 w-auto" />
+            <img src="/logo/yvann-mark.svg" alt="Yvann" className="h-7 w-auto" />
           </Link>
 
           {/* Nav desktop */}
@@ -121,7 +121,7 @@ export function Header() {
             >
               <IconShoppingBag size={20} />
               {cartCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rho-blue-500 text-[10px] font-semibold text-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-500 text-[10px] font-semibold text-white">
                   {cartCount}
                 </span>
               )}
@@ -179,10 +179,10 @@ export function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-rho-ink-950/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[60] bg-yvann-black-950/95 backdrop-blur-xl lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-4">
-              <img src="/logo/rho-mark.svg" alt="RHO" className="h-7 w-auto" />
+              <img src="/logo/yvann-mark.svg" alt="Yvann" className="h-7 w-auto" />
               <button
                 aria-label="Fermer le menu"
                 className="rounded-full p-2 text-white"
@@ -225,7 +225,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="/inscription"
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-rho-blue-600 py-2.5 text-center text-sm font-semibold text-white"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-yvann-gold-600 py-2.5 text-center text-sm font-semibold text-white"
                 >
                   <IconUser size={16} /> Créer un compte
                 </Link>

@@ -22,7 +22,7 @@ export function GlassTag({ label, selected, onToggle, disabled, swatchColor }: G
       className={cn(
         "liquid-glass flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
         "text-text",
-        selected && "border-rho-blue-500 bg-rho-blue-500/15 text-rho-blue-600",
+        selected && "border-yvann-gold-500 bg-yvann-gold-500/15 text-yvann-gold-600",
         disabled && "cursor-not-allowed opacity-40"
       )}
     >

@@ -3,7 +3,7 @@ import { verifyAccessToken } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function getSessionUser() {
-  const token = cookies().get("rho_access_token")?.value;
+  const token = cookies().get("yvann_access_token")?.value;
   if (!token) return null;
 
   try {

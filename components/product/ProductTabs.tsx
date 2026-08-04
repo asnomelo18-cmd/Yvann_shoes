@@ -17,7 +17,7 @@ export function ProductTabs({ product }: { product: ProductDetail }) {
           <Tabs.Trigger
             key={tab.value}
             value={tab.value}
-            className="border-b-2 border-transparent pb-3 text-sm font-medium text-text-muted data-[state=active]:border-rho-blue-600 data-[state=active]:text-text"
+            className="border-b-2 border-transparent pb-3 text-sm font-medium text-text-muted data-[state=active]:border-yvann-gold-600 data-[state=active]:text-text"
           >
             {tab.label}
           </Tabs.Trigger>

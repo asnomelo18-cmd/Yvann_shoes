@@ -105,7 +105,7 @@ export default function ProductPage() {
 
           <div className="mt-2 flex items-center gap-3 text-sm text-text-muted">
             <span className="flex items-center gap-1">
-              <IconStar size={15} className="fill-rho-warning text-rho-warning" />
+              <IconStar size={15} className="fill-yvann-warning text-yvann-warning" />
               {product.avgRating.toFixed(1)} ({product.reviews.length} avis)
             </span>
             <span>·</span>
@@ -119,7 +119,7 @@ export default function ProductPage() {
                 <span className="text-base text-text-muted line-through">
                   {formatPrice(product.compareAtPrice)}
                 </span>
-                <span className="rounded-full bg-rho-danger px-2 py-0.5 text-xs font-semibold text-white">
+                <span className="rounded-full bg-yvann-danger px-2 py-0.5 text-xs font-semibold text-white">
                   -{discountPct}%
                 </span>
               </>
@@ -175,7 +175,7 @@ export default function ProductPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <button
               onClick={handleAddToCart}
-              className="flex items-center gap-2 rounded-full bg-rho-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-rho-blue-700"
+              className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700"
             >
               <IconShoppingBagPlus size={17} /> Ajouter au panier
             </button>
@@ -185,9 +185,9 @@ export default function ProductPage() {
             <button
               aria-label="Favoris"
               onClick={() => setIsFavorite((f) => !f)}
-              className={`rounded-full border p-3 ${isFavorite ? "border-rho-danger text-rho-danger" : "border-slate-300 text-text dark:border-slate-700"}`}
+              className={`rounded-full border p-3 ${isFavorite ? "border-yvann-danger text-yvann-danger" : "border-slate-300 text-text dark:border-slate-700"}`}
             >
-              <IconHeart size={18} className={isFavorite ? "fill-rho-danger" : ""} />
+              <IconHeart size={18} className={isFavorite ? "fill-yvann-danger" : ""} />
             </button>
             <button
               aria-label="Comparer"

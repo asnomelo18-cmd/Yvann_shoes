@@ -68,7 +68,7 @@ export function getProductDetail(slug: string): ProductDetail | null {
 
   return {
     ...product,
-    sku: `RHO-${product.id.padStart(5, "0")}`,
+    sku: `YV-${product.id.padStart(5, "0")}`,
     description: GENERIC_DESCRIPTION,
     materials: GENERIC_MATERIALS,
     careInstructions: GENERIC_CARE,

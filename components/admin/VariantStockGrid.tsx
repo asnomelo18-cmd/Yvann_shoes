@@ -60,12 +60,12 @@ export function VariantStockGrid({
                         min={0}
                         value={qty}
                         onChange={(e) => setCell(size, color, Math.max(0, Number(e.target.value)))}
-                        className="w-16 rounded-lg border border-slate-300 bg-transparent px-2 py-1 text-center text-sm text-text focus:border-rho-blue-500 focus:outline-none dark:border-slate-700"
+                        className="w-16 rounded-lg border border-slate-300 bg-transparent px-2 py-1 text-center text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
                       />
                       {qty === 0 && (
                         <IconAlertTriangle
                           size={14}
-                          className="shrink-0 text-rho-warning"
+                          className="shrink-0 text-yvann-warning"
                           aria-label="Rupture de stock"
                         />
                       )}
