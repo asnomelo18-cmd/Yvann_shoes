@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import { toast } from "sonner";
 import { loginSchema, type LoginFormValues } from "@/lib/auth-schemas";
 import { useLogin } from "@/services/auth";
 
-export default function ConnexionPage() {
+function ConnexionForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const login = useLogin();
@@ -80,5 +81,13 @@ export default function ConnexionPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function ConnexionPage() {
+  return (
+    <Suspense fallback={null}>
+      <ConnexionForm />
+    </Suspense>
   );
 }
