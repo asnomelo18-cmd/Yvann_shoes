@@ -59,7 +59,7 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <nav className="liquid-glass flex w-full items-center justify-between rounded-full px-4 py-2.5 sm:px-6">
+        <nav className="flex w-full items-center justify-between rounded-full border border-yvann-gold-600/20 bg-yvann-black-950/95 px-4 py-2.5 shadow-lg shadow-black/20 backdrop-blur-md sm:px-6">
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo/yvann-mark.svg" alt="Yvann" className="h-7 w-auto" />
           </Link>
@@ -88,7 +88,7 @@ export function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.15 }}
-                      className="liquid-glass absolute left-0 top-full mt-2 min-w-[180px] rounded-2xl p-2"
+                      className="absolute left-0 top-full mt-2 min-w-[180px] rounded-2xl border border-yvann-gold-600/20 bg-yvann-black-950/95 p-2 shadow-lg shadow-black/20 backdrop-blur-md"
                     >
                       {item.children.map((child) => (
                         <Link
