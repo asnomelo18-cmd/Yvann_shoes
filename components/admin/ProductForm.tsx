@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,14 +9,21 @@ import { toast } from "sonner";
 import { IconTrash } from "@tabler/icons-react";
 import { GlassTags } from "@/components/shared/GlassTag";
 import { VariantStockGrid, variantKey, type VariantStockMap } from "@/components/admin/VariantStockGrid";
-import { BRANDS, ALL_SIZES, ALL_COLORS, type MockProduct } from "@/lib/mock-products";
+import { ALL_SIZES, ALL_COLORS } from "@/lib/mock-products";
+import {
+  useAdminMeta,
+  useCreateProduct,
+  useUpdateProduct,
+  useDeleteProduct,
+  type AdminProductInput,
+} from "@/services/admin-products";
 
 const productSchema = z.object({
   name: z.string().min(2, "Nom requis"),
-  brand: z.string().min(1, "Marque requise"),
-  category: z.enum(["sneakers", "running", "ville", "training"]),
-  gender: z.enum(["homme", "femme", "enfant"]),
-  usage: z.enum(["running", "streetwear", "training", "ville", "sport"]),
+  brandId: z.string().min(1, "Marque requise"),
+  categoryIds: z.array(z.string()).min(1, "Choisissez au moins une catégorie"),
+  gender: z.enum(["HOMME", "FEMME", "ENFANT", "UNISEXE"]),
+  usage: z.enum(["RUNNING", "STREETWEAR", "TRAINING", "VILLE", "SPORT"]),
   description: z.string().min(10, "Description trop courte"),
   basePrice: z.coerce.number().positive("Prix requis"),
   compareAtPrice: z.coerce.number().optional(),
@@ -24,77 +31,142 @@ const productSchema = z.object({
 
 type ProductFormValues = z.infer<typeof productSchema>;
 
-const CATEGORY_OPTIONS = [
-  { value: "sneakers", label: "Sneakers" },
-  { value: "running", label: "Running" },
-  { value: "ville", label: "Ville" },
-  { value: "training", label: "Training" },
-];
-
 const GENDER_OPTIONS = [
-  { value: "homme", label: "Homme" },
-  { value: "femme", label: "Femme" },
-  { value: "enfant", label: "Enfant" },
+  { value: "HOMME", label: "Homme" },
+  { value: "FEMME", label: "Femme" },
+  { value: "ENFANT", label: "Enfant" },
+  { value: "UNISEXE", label: "Unisexe" },
 ];
 
 const USAGE_OPTIONS = [
-  { value: "running", label: "Running" },
-  { value: "streetwear", label: "Streetwear" },
-  { value: "training", label: "Training" },
-  { value: "ville", label: "Ville" },
-  { value: "sport", label: "Sport" },
+  { value: "RUNNING", label: "Running" },
+  { value: "STREETWEAR", label: "Streetwear" },
+  { value: "TRAINING", label: "Training" },
+  { value: "VILLE", label: "Ville" },
+  { value: "SPORT", label: "Sport" },
 ];
 
-export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }) {
+interface ExistingProduct {
+  id: string;
+  name: string;
+  brandId: string;
+  gender: string;
+  usage: string | null;
+  description: string;
+  basePrice: number;
+  compareAtPrice: number | null;
+  categories: { categoryId: string }[];
+  variants: { size: { eu: number }; color: { name: string }; stock: number }[];
+}
+
+export function ProductForm({ initialProduct }: { initialProduct?: ExistingProduct }) {
   const router = useRouter();
   const isEditing = !!initialProduct;
+
+  const { data: meta, isLoading: metaLoading } = useAdminMeta();
+  const createProduct = useCreateProduct();
+  const updateProduct = useUpdateProduct(initialProduct?.id ?? "");
+  const deleteProduct = useDeleteProduct();
 
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
+    reset,
     formState: { errors },
   } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
     defaultValues: initialProduct
       ? {
           name: initialProduct.name,
-          brand: initialProduct.brand,
-          category: initialProduct.category,
-          gender: initialProduct.gender,
-          usage: initialProduct.usage,
-          description: "",
+          brandId: initialProduct.brandId,
+          categoryIds: initialProduct.categories.map((c) => c.categoryId),
+          gender: initialProduct.gender as ProductFormValues["gender"],
+          usage: (initialProduct.usage ?? "STREETWEAR") as ProductFormValues["usage"],
+          description: initialProduct.description,
           basePrice: initialProduct.basePrice,
           compareAtPrice: initialProduct.compareAtPrice ?? undefined,
         }
-      : { category: "sneakers", gender: "homme", usage: "streetwear" },
+      : { gender: "HOMME", usage: "STREETWEAR" },
   });
 
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>(
+    initialProduct?.categories.map((c) => c.categoryId) ?? []
+  );
   const [selectedColors, setSelectedColors] = useState<string[]>(
-    initialProduct?.colors.map((c) => c.name) ?? []
+    initialProduct ? [...new Set(initialProduct.variants.map((v) => v.color.name))] : []
   );
   const [selectedSizes, setSelectedSizes] = useState<string[]>(
-    initialProduct?.availableSizes.map(String) ?? []
+    initialProduct ? [...new Set(initialProduct.variants.map((v) => String(v.size.eu)))] : []
   );
   const [stock, setStock] = useState<VariantStockMap>(() => {
     if (!initialProduct) return {};
     const map: VariantStockMap = {};
-    for (const size of initialProduct.availableSizes) {
-      for (const color of initialProduct.colors) {
-        map[variantKey(size, color.name)] = 8; // stock de démo — non fourni par MockProduct
-      }
+    for (const v of initialProduct.variants) {
+      map[variantKey(v.size.eu, v.color.name)] = v.stock;
     }
     return map;
   });
 
+  // Garde le champ caché categoryIds du resolver synchronisé avec les tags sélectionnés
+  useEffect(() => {
+    reset((current) => ({ ...current, categoryIds: selectedCategoryIds } as ProductFormValues));
+  }, [selectedCategoryIds, reset]);
+
   function onSubmit(values: ProductFormValues) {
-    // TODO : POST/PATCH /api/admin/products → Prisma (Product + Variant en une transaction)
-    // Chaque combinaison de `stock` devient une ligne Variant { productId, sizeId, colorId, stock }
-    console.log({ values, colors: selectedColors, sizes: selectedSizes, stock });
-    toast.success(isEditing ? "Produit mis à jour." : "Produit créé.");
-    router.push("/admin/produits");
+    if (selectedCategoryIds.length === 0) {
+      toast.error("Choisissez au moins une catégorie.");
+      return;
+    }
+    if (selectedSizes.length === 0 || selectedColors.length === 0) {
+      toast.error("Choisissez au moins une pointure et un coloris.");
+      return;
+    }
+
+    const variants = selectedSizes.flatMap((sizeStr) =>
+      selectedColors.map((colorName) => ({
+        sizeEu: Number(sizeStr),
+        colorName,
+        stock: stock[variantKey(Number(sizeStr), colorName)] ?? 0,
+      }))
+    );
+
+    const payload: AdminProductInput = {
+      name: values.name,
+      brandId: values.brandId,
+      categoryIds: selectedCategoryIds,
+      gender: values.gender,
+      usage: values.usage,
+      description: values.description,
+      basePrice: values.basePrice,
+      compareAtPrice: values.compareAtPrice || null,
+      variants,
+    };
+
+    const mutation = isEditing ? updateProduct : createProduct;
+    mutation.mutate(payload, {
+      onSuccess: () => {
+        toast.success(isEditing ? "Produit mis à jour." : "Produit créé.");
+        router.push("/admin/produits");
+      },
+      onError: (error) => {
+        toast.error(error instanceof Error ? error.message : "Une erreur est survenue.");
+      },
+    });
   }
+
+  function handleDelete() {
+    if (!initialProduct) return;
+    if (!confirm(`Supprimer « ${initialProduct.name} » ? Cette action est irréversible.`)) return;
+    deleteProduct.mutate(initialProduct.id, {
+      onSuccess: () => {
+        toast.success("Produit supprimé.");
+        router.push("/admin/produits");
+      },
+      onError: () => toast.error("Suppression impossible."),
+    });
+  }
+
+  const isSubmitting = createProduct.isPending || updateProduct.isPending;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl space-y-8">
@@ -113,31 +185,18 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
           <div>
             <label className="mb-1.5 block text-xs font-medium text-text-muted">Marque</label>
             <select
-              {...register("brand")}
+              {...register("brandId")}
+              disabled={metaLoading}
               className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
             >
               <option value="">Choisir...</option>
-              {BRANDS.map((b) => (
-                <option key={b} value={b}>
-                  {b}
+              {meta?.brands.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.name}
                 </option>
               ))}
             </select>
-            {errors.brand && <p className="mt-1 text-xs text-yvann-danger">{errors.brand.message}</p>}
-          </div>
-
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-text-muted">Catégorie</label>
-            <select
-              {...register("category")}
-              className="w-full rounded-xl border border-slate-300 bg-transparent px-4 py-2.5 text-sm text-text focus:border-yvann-gold-500 focus:outline-none dark:border-slate-700"
-            >
-              {CATEGORY_OPTIONS.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
+            {errors.brandId && <p className="mt-1 text-xs text-yvann-danger">{errors.brandId.message}</p>}
           </div>
 
           <div>
@@ -166,6 +225,15 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="col-span-2">
+            <label className="mb-1.5 block text-xs font-medium text-text-muted">Catégories</label>
+            <GlassTags
+              options={(meta?.categories ?? []).map((c) => ({ value: c.id, label: c.name }))}
+              selected={selectedCategoryIds}
+              onChange={setSelectedCategoryIds}
+            />
           </div>
 
           <div className="col-span-2">
@@ -239,9 +307,10 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
         <div className="flex gap-3">
           <button
             type="submit"
-            className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
+            disabled={isSubmitting}
+            className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500 disabled:opacity-60"
           >
-            {isEditing ? "Enregistrer les modifications" : "Créer le produit"}
+            {isSubmitting ? "Enregistrement..." : isEditing ? "Enregistrer les modifications" : "Créer le produit"}
           </button>
           <button
             type="button"
@@ -254,10 +323,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: MockProduct }
         {isEditing && (
           <button
             type="button"
-            onClick={() => {
-              toast.success("Produit supprimé.");
-              router.push("/admin/produits");
-            }}
+            onClick={handleDelete}
             className="flex items-center gap-1.5 text-sm font-medium text-yvann-danger hover:underline"
           >
             <IconTrash size={15} /> Supprimer

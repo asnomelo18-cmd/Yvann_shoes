@@ -5,8 +5,6 @@ import { requireAdmin } from "@/lib/session";
 
 const createProductSchema = z.object({
   name: z.string().min(2),
-  slug: z.string().min(2),
-  sku: z.string().min(2),
   brandId: z.string(),
   categoryIds: z.array(z.string()).min(1),
   gender: z.enum(["HOMME", "FEMME", "ENFANT", "UNISEXE"]),
@@ -24,6 +22,17 @@ const createProductSchema = z.object({
     )
     .min(1),
 });
+
+function slugify(name: string) {
+  return (
+    name
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "") + `-${Date.now().toString().slice(-5)}`
+  );
+}
 
 export async function GET() {
   const admin = await requireAdmin();
@@ -46,21 +55,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
   const data = parsed.data;
+  const slug = slugify(data.name);
 
   const product = await prisma.$transaction(async (tx) => {
     const created = await tx.product.create({
       data: {
         name: data.name,
-        slug: data.slug,
-        sku: data.sku,
+        slug,
+        sku: `YV-${slug.toUpperCase()}`,
         brandId: data.brandId,
         gender: data.gender,
         usage: data.usage,
         description: data.description,
         basePrice: data.basePrice,
         compareAtPrice: data.compareAtPrice,
-        isPublished: false, // publié explicitement ensuite depuis la liste admin
+        isPublished: true,
         categories: { create: data.categoryIds.map((categoryId) => ({ categoryId })) },
+        images: {
+          create: [
+            { url: `https://picsum.photos/seed/${slug}-1/800/800`, angle: "Face", position: 0 },
+            { url: `https://picsum.photos/seed/${slug}-2/800/800`, angle: "Profil", position: 1 },
+          ],
+        },
       },
     });
 
@@ -73,12 +89,16 @@ export async function POST(request: Request) {
       const color = await tx.color.upsert({
         where: { name: v.colorName },
         update: {},
-        create: { name: v.colorName, hexCode: "#64748B" },
+        create: { name: v.colorName, hexCode: "#5C5C63" },
       });
       await tx.variant.create({
         data: { productId: created.id, sizeId: size.id, colorId: color.id, stock: v.stock },
       });
     }
+
+    await tx.auditLog.create({
+      data: { userId: admin.id, action: "product.create", entity: "Product", entityId: created.id },
+    });
 
     return created;
   });
