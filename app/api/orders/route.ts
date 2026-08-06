@@ -32,21 +32,21 @@ const createOrderSchema = z.object({
 const SHIPPING_PRICE = { standard: 2500, express: 6000 };
 
 export async function POST(request: Request) {
-  const user = await getSessionUser();
-  if (!user) {
-    return NextResponse.json({ error: "Connexion requise pour commander." }, { status: 401 });
-  }
+  try {
+    const user = await getSessionUser();
+    if (!user) {
+      return NextResponse.json({ error: "Connexion requise pour commander." }, { status: 401 });
+    }
 
-  const body = await request.json();
-  const parsed = createOrderSchema.safeParse(body);
-  if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
-  }
+    const body = await request.json();
+    const parsed = createOrderSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Formulaire de commande invalide." }, { status: 400 });
+    }
 
   const { items, address, deliveryMethod, payment } = parsed.data;
 
-  try {
-    const order = await prisma.$transaction(async (tx) => {
+  const order = await prisma.$transaction(async (tx) => {
       // Vérifie et décrémente le stock de chaque variante commandée
       const variants = await tx.variant.findMany({
         where: { id: { in: items.map((i) => i.variantId) } },
