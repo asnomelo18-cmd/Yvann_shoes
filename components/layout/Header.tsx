@@ -15,6 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/store/cart-store";
 import { useSession, useLogout } from "@/services/auth";
+import { useWishlist } from "@/services/wishlist";
 
 interface NavItem {
   label: string;
@@ -53,6 +54,8 @@ export function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const cartCount = useCartStore((s) => s.lines.reduce((n, l) => n + l.quantity, 0));
   const openCart = useCartStore((s) => s.open);
+  const { data: wishlistItems } = useWishlist();
+  const wishlistCount = wishlistItems?.length ?? 0;
   const { data: session } = useSession();
   const logout = useLogout();
 
@@ -108,12 +111,18 @@ export function Header() {
 
           {/* Actions droite */}
           <div className="hidden items-center gap-2 lg:flex">
-            <button
+            <Link
+              href="/favoris"
               aria-label="Favoris"
-              className="rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white"
+              className="relative rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white"
             >
               <IconHeart size={20} />
-            </button>
+              {wishlistCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-600 text-[10px] font-semibold text-yvann-black-950">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
             <button
               aria-label="Panier"
               onClick={openCart}

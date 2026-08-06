@@ -75,21 +75,33 @@ export default function ComptePage() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { icon: IconUserCircle, label: "Profil", desc: "Infos personnelles" },
-          { icon: IconMapPin, label: "Adresses", desc: "Livraison & facturation" },
-          { icon: IconHeart, label: "Favoris", desc: "Vos coups de cœur" },
-          { icon: IconBell, label: "Notifications", desc: "Suivi & promos" },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="rounded-2xl border border-slate-200 p-5 text-text-muted dark:border-slate-800"
-          >
-            <item.icon size={22} className="text-yvann-gold-600" />
-            <p className="mt-3 text-sm font-medium text-text">{item.label}</p>
-            <p className="text-xs">{item.desc}</p>
-            <p className="mt-2 text-xs italic text-text-muted">Bientôt disponible</p>
-          </div>
-        ))}
+          { icon: IconUserCircle, label: "Profil", desc: "Infos personnelles", href: null },
+          { icon: IconMapPin, label: "Adresses", desc: "Livraison & facturation", href: null },
+          { icon: IconHeart, label: "Favoris", desc: "Vos coups de cœur", href: "/favoris" },
+          { icon: IconBell, label: "Notifications", desc: "Suivi & promos", href: null },
+        ].map((item) =>
+          item.href ? (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="rounded-2xl border border-slate-200 p-5 text-text-muted transition-colors hover:border-yvann-gold-500 dark:border-slate-800"
+            >
+              <item.icon size={22} className="text-yvann-gold-600" />
+              <p className="mt-3 text-sm font-medium text-text">{item.label}</p>
+              <p className="text-xs">{item.desc}</p>
+            </Link>
+          ) : (
+            <div
+              key={item.label}
+              className="rounded-2xl border border-slate-200 p-5 text-text-muted dark:border-slate-800"
+            >
+              <item.icon size={22} className="text-yvann-gold-600" />
+              <p className="mt-3 text-sm font-medium text-text">{item.label}</p>
+              <p className="text-xs">{item.desc}</p>
+              <p className="mt-2 text-xs italic text-text-muted">Bientôt disponible</p>
+            </div>
+          )
+        )}
       </div>
 
       <div className="mt-10">

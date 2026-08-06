@@ -1,14 +1,30 @@
 "use client";
 
 import Link from "next/link";
+import { toast } from "sonner";
 import { IconStar, IconHeart } from "@tabler/icons-react";
 import { formatPrice } from "@/lib/utils";
+import { useIsWishlisted, useToggleWishlist } from "@/services/wishlist";
 import type { MockProduct } from "@/lib/mock-products";
 
 export function ProductCard({ product, view = "grid" }: { product: MockProduct; view?: "grid" | "list" }) {
   const discountPct = product.compareAtPrice
     ? Math.round((1 - product.basePrice / product.compareAtPrice) * 100)
     : null;
+
+  const isWishlisted = useIsWishlisted(product.id);
+  const { add, remove } = useToggleWishlist();
+
+  function handleToggleWishlist(e: React.MouseEvent) {
+    e.preventDefault();
+    if (isWishlisted) {
+      remove.mutate(product.id);
+    } else {
+      add.mutate(product.id, {
+        onError: () => toast.error("Connectez-vous pour ajouter aux favoris."),
+      });
+    }
+  }
 
   return (
     <Link
@@ -44,11 +60,16 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
           )}
         </div>
         <button
-          aria-label="Ajouter aux favoris"
-          onClick={(e) => e.preventDefault()}
-          className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-yvann-black-950 opacity-0 transition-opacity group-hover:opacity-100"
+          aria-label={isWishlisted ? "Retirer des favoris" : "Ajouter aux favoris"}
+          onClick={handleToggleWishlist}
+          className={`absolute right-2 top-2 rounded-full p-1.5 transition-opacity ${
+            isWishlisted ? "bg-white/90 opacity-100" : "bg-white/90 opacity-0 group-hover:opacity-100"
+          }`}
         >
-          <IconHeart size={16} />
+          <IconHeart
+            size={16}
+            className={isWishlisted ? "fill-yvann-danger text-yvann-danger" : "text-yvann-black-950"}
+          />
         </button>
       </div>
 

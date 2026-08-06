@@ -17,6 +17,7 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { SizeSelector } from "@/components/product/SizeSelector";
 import { ReviewsSection } from "@/components/product/ReviewsSection";
 import { useProduct } from "@/services/products";
+import { useIsWishlisted, useToggleWishlist } from "@/services/wishlist";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cart-store";
 
@@ -27,7 +28,9 @@ export default function ProductPage() {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [isFavorite, setIsFavorite] = useState(false);
+
+  const isFavorite = useIsWishlisted(product?.id ?? "");
+  const { add: addToWishlist, remove: removeFromWishlist } = useToggleWishlist();
 
   const addLine = useCartStore((s) => s.addLine);
   const openCart = useCartStore((s) => s.open);
@@ -183,8 +186,18 @@ export default function ProductPage() {
               Acheter maintenant
             </button>
             <button
-              aria-label="Favoris"
-              onClick={() => setIsFavorite((f) => !f)}
+              aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+              onClick={() => {
+                if (!product) return;
+                if (isFavorite) {
+                  removeFromWishlist.mutate(product.id);
+                } else {
+                  addToWishlist.mutate(product.id, {
+                    onSuccess: () => toast.success("Ajouté à vos favoris."),
+                    onError: () => toast.error("Connectez-vous pour ajouter aux favoris."),
+                  });
+                }
+              }}
               className={`rounded-full border p-3 ${isFavorite ? "border-yvann-danger text-yvann-danger" : "border-slate-300 text-text dark:border-slate-700"}`}
             >
               <IconHeart size={18} className={isFavorite ? "fill-yvann-danger" : ""} />
