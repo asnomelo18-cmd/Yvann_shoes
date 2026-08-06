@@ -9,6 +9,7 @@ import {
   IconX,
   IconShoppingBag,
   IconHeart,
+  IconGitCompare,
   IconUser,
   IconLogout,
 } from "@tabler/icons-react";
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { useCartStore } from "@/store/cart-store";
 import { useSession, useLogout } from "@/services/auth";
 import { useWishlist } from "@/services/wishlist";
+import { useCompareList } from "@/services/compare";
 
 interface NavItem {
   label: string;
@@ -56,6 +58,8 @@ export function Header() {
   const openCart = useCartStore((s) => s.open);
   const { data: wishlistItems } = useWishlist();
   const wishlistCount = wishlistItems?.length ?? 0;
+  const { data: compareItems } = useCompareList();
+  const compareCount = compareItems?.length ?? 0;
   const { data: session } = useSession();
   const logout = useLogout();
 
@@ -120,6 +124,18 @@ export function Header() {
               {wishlistCount > 0 && (
                 <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-600 text-[10px] font-semibold text-yvann-black-950">
                   {wishlistCount}
+                </span>
+              )}
+            </Link>
+            <Link
+              href="/comparateur"
+              aria-label="Comparateur"
+              className="relative rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white"
+            >
+              <IconGitCompare size={20} />
+              {compareCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-600 text-[10px] font-semibold text-yvann-black-950">
+                  {compareCount}
                 </span>
               )}
             </Link>

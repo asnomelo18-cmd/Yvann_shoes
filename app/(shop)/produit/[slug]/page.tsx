@@ -18,6 +18,7 @@ import { SizeSelector } from "@/components/product/SizeSelector";
 import { ReviewsSection } from "@/components/product/ReviewsSection";
 import { useProduct } from "@/services/products";
 import { useIsWishlisted, useToggleWishlist } from "@/services/wishlist";
+import { useIsCompared, useToggleCompare } from "@/services/compare";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cart-store";
 
@@ -31,6 +32,8 @@ export default function ProductPage() {
 
   const isFavorite = useIsWishlisted(product?.id ?? "");
   const { add: addToWishlist, remove: removeFromWishlist } = useToggleWishlist();
+  const isCompared = useIsCompared(product?.id ?? "");
+  const { add: addToCompare, remove: removeFromCompare } = useToggleCompare();
 
   const addLine = useCartStore((s) => s.addLine);
   const openCart = useCartStore((s) => s.open);
@@ -203,8 +206,20 @@ export default function ProductPage() {
               <IconHeart size={18} className={isFavorite ? "fill-yvann-danger" : ""} />
             </button>
             <button
-              aria-label="Comparer"
-              className="rounded-full border border-slate-300 p-3 text-text dark:border-slate-700"
+              aria-label={isCompared ? "Retirer du comparateur" : "Ajouter au comparateur"}
+              onClick={() => {
+                if (!product) return;
+                if (isCompared) {
+                  removeFromCompare.mutate(product.id);
+                } else {
+                  addToCompare.mutate(product.id, {
+                    onSuccess: () => toast.success("Ajouté au comparateur."),
+                    onError: (error) =>
+                      toast.error(error instanceof Error ? error.message : "Ajout impossible."),
+                  });
+                }
+              }}
+              className={`rounded-full border p-3 ${isCompared ? "border-yvann-gold-600 text-yvann-gold-600" : "border-slate-300 text-text dark:border-slate-700"}`}
             >
               <IconGitCompare size={18} />
             </button>
