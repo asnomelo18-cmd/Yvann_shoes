@@ -12,6 +12,7 @@ import {
   IconGitCompare,
   IconUser,
   IconLogout,
+  IconLayoutDashboard,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/store/cart-store";
@@ -169,6 +170,14 @@ export function Header() {
               </>
             ) : (
               <>
+                {["ADMIN", "MANAGER", "SUPPORT", "VENDEUR"].includes(session.role) && (
+                  <Link
+                    href="/admin"
+                    className="flex items-center gap-1.5 rounded-full bg-yvann-gold-600/15 px-3 py-2 text-sm font-medium text-yvann-gold-400 hover:bg-yvann-gold-600/25"
+                  >
+                    <IconLayoutDashboard size={16} /> Admin
+                  </Link>
+                )}
                 <Link
                   href="/compte"
                   className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-white/90 hover:text-white"
@@ -241,19 +250,51 @@ export function Header() {
                   </Link>
                 </motion.li>
               ))}
-              <li className="mt-4 flex gap-3">
-                <Link
-                  href="/connexion"
-                  className="flex-1 rounded-full border border-white/20 py-2.5 text-center text-sm font-medium text-white"
-                >
-                  Se connecter
-                </Link>
-                <Link
-                  href="/inscription"
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-yvann-gold-600 py-2.5 text-center text-sm font-semibold text-white"
-                >
-                  <IconUser size={16} /> Créer un compte
-                </Link>
+              <li className="mt-4 flex flex-col gap-3">
+                {!session ? (
+                  <div className="flex gap-3">
+                    <Link
+                      href="/connexion"
+                      className="flex-1 rounded-full border border-white/20 py-2.5 text-center text-sm font-medium text-white"
+                    >
+                      Se connecter
+                    </Link>
+                    <Link
+                      href="/inscription"
+                      className="flex flex-1 items-center justify-center gap-2 rounded-full bg-yvann-gold-600 py-2.5 text-center text-sm font-semibold text-white"
+                    >
+                      <IconUser size={16} /> Créer un compte
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    {["ADMIN", "MANAGER", "SUPPORT", "VENDEUR"].includes(session.role) && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center justify-center gap-2 rounded-full bg-yvann-gold-600/15 py-2.5 text-center text-sm font-semibold text-yvann-gold-400"
+                      >
+                        <IconLayoutDashboard size={16} /> Espace admin
+                      </Link>
+                    )}
+                    <Link
+                      href="/compte"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center justify-center gap-2 rounded-full border border-white/20 py-2.5 text-center text-sm font-medium text-white"
+                    >
+                      <IconUser size={16} /> {session.firstName ?? "Mon compte"}
+                    </Link>
+                    <button
+                      onClick={() => {
+                        logout.mutate();
+                        setMobileOpen(false);
+                      }}
+                      className="flex items-center justify-center gap-2 rounded-full py-2.5 text-center text-sm font-medium text-white/70"
+                    >
+                      <IconLogout size={16} /> Déconnexion
+                    </button>
+                  </>
+                )}
               </li>
             </motion.ul>
           </motion.div>
