@@ -145,7 +145,7 @@ export default function AdminContenuPage() {
                     onClick={() => toggleActive.mutate({ id: b.id, isActive: !b.isActive })}
                     className={cn(
                       "rounded-full px-2.5 py-1 text-xs font-medium",
-                      b.isActive ? "bg-yvann-success/15 text-yvann-success" : "bg-slate-400/15 text-text-muted"
+                      b.isActive ? "bg-yvann-success/15 text-yvann-successText" : "bg-slate-400/15 text-text-muted"
                     )}
                   >
                     {b.isActive ? "Active" : "Inactive"}

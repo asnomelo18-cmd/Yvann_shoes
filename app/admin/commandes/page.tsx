@@ -17,11 +17,11 @@ const ORDER_STATUS_LABELS: Record<string, string> = {
 };
 
 const STATUS_TONE: Record<string, string> = {
-  EN_ATTENTE: "bg-yvann-warning/15 text-yvann-warning",
-  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-600",
-  PREPARATION: "bg-yvann-bronze-500/15 text-yvann-bronze-500",
-  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-600",
-  LIVREE: "bg-yvann-success/15 text-yvann-success",
+  EN_ATTENTE: "bg-yvann-warning/15 text-yvann-warningText",
+  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  PREPARATION: "bg-yvann-bronze-500/15 text-yvann-bronzeText",
+  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  LIVREE: "bg-yvann-success/15 text-yvann-successText",
   ANNULEE: "bg-yvann-danger/15 text-yvann-danger",
   REMBOURSEE: "bg-slate-400/15 text-text-muted",
 };

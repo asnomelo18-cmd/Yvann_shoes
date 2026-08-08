@@ -103,12 +103,12 @@ export default function AdminAvisPage() {
                         <IconStar
                           key={i}
                           size={13}
-                          className={i < r.rating ? "fill-yvann-warning text-yvann-warning" : "text-slate-300 dark:text-slate-700"}
+                          className={i < r.rating ? "fill-yvann-warning text-yvann-warningText" : "text-slate-300 dark:text-slate-700"}
                         />
                       ))}
                     </div>
                     {r.verifiedPurchase && (
-                      <span className="flex items-center gap-1 text-xs text-yvann-success">
+                      <span className="flex items-center gap-1 text-xs text-yvann-successText">
                         <IconCircleCheck size={12} /> Achat vérifié
                       </span>
                     )}
@@ -117,7 +117,7 @@ export default function AdminAvisPage() {
                   <p className="text-sm text-text-muted">{r.comment}</p>
                   <p className="mt-2 text-xs text-text-muted">
                     {r.customerName} · sur{" "}
-                    <Link href={`/produit/${r.productSlug}`} className="text-yvann-gold-600 hover:underline">
+                    <Link href={`/produit/${r.productSlug}`} className="text-yvann-gold-700 hover:underline">
                       {r.productName}
                     </Link>{" "}
                     · {new Date(r.createdAt).toLocaleDateString("fr-FR")}
@@ -128,7 +128,7 @@ export default function AdminAvisPage() {
                   <div className="flex shrink-0 gap-2">
                     <button
                       onClick={() => updateStatus.mutate({ id: r.id, status: "approved" })}
-                      className="rounded-full bg-yvann-success/15 p-2 text-yvann-success hover:bg-yvann-success/25"
+                      className="rounded-full bg-yvann-success/15 p-2 text-yvann-successText hover:bg-yvann-success/25"
                       aria-label="Approuver"
                     >
                       <IconCheck size={15} />

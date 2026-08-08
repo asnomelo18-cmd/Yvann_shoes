@@ -178,7 +178,7 @@ export default function AdminPromotionsPage() {
                       onClick={() => toggleActive.mutate({ id: c.id, isActive: !c.isActive })}
                       className={cn(
                         "rounded-full px-2.5 py-1 text-xs font-medium",
-                        c.isActive ? "bg-yvann-success/15 text-yvann-success" : "bg-slate-400/15 text-text-muted"
+                        c.isActive ? "bg-yvann-success/15 text-yvann-successText" : "bg-slate-400/15 text-text-muted"
                       )}
                     >
                       {c.isActive ? "Actif" : "Inactif"}

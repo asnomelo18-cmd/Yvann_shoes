@@ -26,7 +26,7 @@ export default function LivraisonPage() {
       <p>
         Une fois votre commande expédiée, vous pouvez suivre son statut
         directement depuis votre espace{" "}
-        <a href="/compte" className="text-yvann-gold-600 hover:underline">
+        <a href="/compte" className="text-yvann-gold-700 hover:underline">
           Mon compte
         </a>
         .

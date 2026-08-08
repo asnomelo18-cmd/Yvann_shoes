@@ -37,7 +37,7 @@ export default function AdminNotificationsPage() {
   return (
     <div>
       <div className="flex items-start gap-3 rounded-2xl border border-yvann-gold-600/30 bg-yvann-gold-600/5 p-4 text-sm text-text-muted">
-        <IconInfoCircle size={18} className="mt-0.5 shrink-0 text-yvann-gold-600" />
+        <IconInfoCircle size={18} className="mt-0.5 shrink-0 text-yvann-gold-700" />
         <p>
           Cette page affiche l'historique des notifications envoyées aux clients (dans l'app pour
           l'instant). L'envoi réel par e-mail, SMS ou WhatsApp nécessite de connecter un service
@@ -63,7 +63,7 @@ export default function AdminNotificationsPage() {
                   n.isRead ? "border-slate-200 dark:border-slate-800" : "border-yvann-gold-600/30 bg-yvann-gold-600/5"
                 )}
               >
-                <Icon size={18} className="mt-0.5 shrink-0 text-yvann-gold-600" />
+                <Icon size={18} className="mt-0.5 shrink-0 text-yvann-gold-700" />
                 <div className="flex-1">
                   <p className="text-sm font-medium text-text">{n.title}</p>
                   <p className="text-sm text-text-muted">{n.body}</p>

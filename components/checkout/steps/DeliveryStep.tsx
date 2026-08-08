@@ -49,7 +49,7 @@ export function DeliveryStep({
               checked={selected === zone.name}
               onChange={() => setValue("zoneName", zone.name)}
             />
-            <IconTruckDelivery size={22} className="text-yvann-gold-600" />
+            <IconTruckDelivery size={22} className="text-yvann-gold-700" />
             <div className="flex-1">
               <p className="text-sm font-medium text-text">{zone.name}</p>
             </div>

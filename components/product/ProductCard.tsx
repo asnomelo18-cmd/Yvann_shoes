@@ -77,7 +77,7 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
         <p className="text-xs text-text-muted">{product.brand}</p>
         <h3 className="text-sm font-medium text-text">{product.name}</h3>
         <div className="mt-1 flex items-center gap-1 text-xs text-text-muted">
-          <IconStar size={13} className="fill-yvann-warning text-yvann-warning" />
+          <IconStar size={13} className="fill-yvann-warning text-yvann-warningText" />
           {product.avgRating.toFixed(1)}
         </div>
         <div className="mt-1.5 flex items-center gap-2">

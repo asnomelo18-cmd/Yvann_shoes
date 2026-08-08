@@ -12,9 +12,9 @@ export function StatCard({
   tone?: "default" | "warning" | "success" | "danger";
 }) {
   const toneClasses: Record<string, string> = {
-    default: "text-yvann-gold-600 bg-yvann-gold-500/10",
-    warning: "text-yvann-warning bg-yvann-warning/10",
-    success: "text-yvann-success bg-yvann-success/10",
+    default: "text-yvann-gold-700 bg-yvann-gold-500/10",
+    warning: "text-yvann-warningText bg-yvann-warning/10",
+    success: "text-yvann-successText bg-yvann-success/10",
     danger: "text-yvann-danger bg-yvann-danger/10",
   };
 

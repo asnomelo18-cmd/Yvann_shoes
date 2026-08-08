@@ -167,7 +167,7 @@ export default function AdminParametresPage() {
             onClick={() =>
               setForm((f) => ({ ...f, shippingZones: [...f.shippingZones, { name: "", price: 0 }] }))
             }
-            className="flex items-center gap-1.5 text-sm font-medium text-yvann-gold-600 hover:underline"
+            className="flex items-center gap-1.5 text-sm font-medium text-yvann-gold-700 hover:underline"
           >
             <IconPlus size={15} /> Ajouter une zone
           </button>

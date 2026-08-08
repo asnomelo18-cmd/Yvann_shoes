@@ -31,7 +31,7 @@ export function ConfirmationStep({
 }) {
   return (
     <div className="max-w-xl text-center">
-      <IconClockHour4 size={48} className="mx-auto text-yvann-warning" />
+      <IconClockHour4 size={48} className="mx-auto text-yvann-warningText" />
       <h2 className="mt-4 text-2xl font-semibold text-text">Commande enregistrée</h2>
       <p className="mt-2 text-sm text-text-muted">
         Commande <span className="font-medium text-text">#{orderNumber}</span> — en

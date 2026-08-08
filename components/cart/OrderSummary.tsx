@@ -62,7 +62,7 @@ export function OrderSummary({
           <dd>{formatPrice(tax)}</dd>
         </div>
         {discount > 0 && (
-          <div className="flex justify-between text-yvann-success">
+          <div className="flex justify-between text-yvann-successText">
             <dt>Réduction</dt>
             <dd>-{formatPrice(discount)}</dd>
           </div>

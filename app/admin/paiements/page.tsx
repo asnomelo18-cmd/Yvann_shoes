@@ -23,8 +23,8 @@ const METHOD_LABELS: Record<string, string> = {
 };
 
 const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
-  EN_ATTENTE: { label: "En attente", className: "bg-yvann-warning/15 text-yvann-warning" },
-  VALIDE: { label: "Validé", className: "bg-yvann-success/15 text-yvann-success" },
+  EN_ATTENTE: { label: "En attente", className: "bg-yvann-warning/15 text-yvann-warningText" },
+  VALIDE: { label: "Validé", className: "bg-yvann-success/15 text-yvann-successText" },
   ECHOUE: { label: "Échoué", className: "bg-yvann-danger/15 text-yvann-danger" },
   REMBOURSE: { label: "Remboursé", className: "bg-yvann-charcoal-500/15 text-text-muted" },
 };
@@ -164,7 +164,7 @@ export default function AdminPaiementsPage() {
                       <div className="flex justify-end gap-2">
                         <button
                           onClick={() => setPendingAction({ id: p.id, action: "VALIDE" })}
-                          className="rounded-full bg-yvann-success/15 px-3 py-1.5 text-xs font-medium text-yvann-success hover:bg-yvann-success/25"
+                          className="rounded-full bg-yvann-success/15 px-3 py-1.5 text-xs font-medium text-yvann-successText hover:bg-yvann-success/25"
                         >
                           Valider
                         </button>

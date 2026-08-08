@@ -22,7 +22,7 @@ export function Stepper({ steps, currentIndex }: { steps: StepperStep[]; current
                 className={cn(
                   "flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors",
                   isDone && "border-yvann-gold-600 bg-yvann-gold-600 text-white",
-                  isActive && "border-yvann-gold-600 text-yvann-gold-600",
+                  isActive && "border-yvann-gold-600 text-yvann-gold-700",
                   !isDone && !isActive && "border-slate-300 text-text-muted dark:border-slate-700"
                 )}
               >

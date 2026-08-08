@@ -97,7 +97,7 @@ export default function AdminProduitsPage() {
                       <span
                         className={cn(
                           "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium",
-                          lowStock ? "bg-yvann-warning/15 text-yvann-warning" : "bg-yvann-success/15 text-yvann-success"
+                          lowStock ? "bg-yvann-warning/15 text-yvann-warningText" : "bg-yvann-success/15 text-yvann-successText"
                         )}
                       >
                         {lowStock && <IconAlertTriangle size={12} />}
@@ -108,7 +108,7 @@ export default function AdminProduitsPage() {
                       <span
                         className={cn(
                           "rounded-full px-2.5 py-1 text-xs font-medium",
-                          p.isPublished ? "bg-yvann-success/15 text-yvann-success" : "bg-slate-400/15 text-text-muted"
+                          p.isPublished ? "bg-yvann-success/15 text-yvann-successText" : "bg-slate-400/15 text-text-muted"
                         )}
                       >
                         {p.isPublished ? "Publié" : "Brouillon"}

@@ -139,7 +139,7 @@ export function PaymentStep({
                 : "border-slate-200 dark:border-slate-800"
             )}
           >
-            <m.icon size={22} className="text-yvann-gold-600" />
+            <m.icon size={22} className="text-yvann-gold-700" />
             <span className="text-xs font-medium text-text">{m.label}</span>
           </button>
         ))}

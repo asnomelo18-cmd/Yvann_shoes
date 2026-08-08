@@ -106,7 +106,7 @@ export default function InscriptionPage() {
 
       <p className="mt-6 text-center text-sm text-text-muted">
         Déjà un compte ?{" "}
-        <Link href="/connexion" className="font-medium text-yvann-gold-600 hover:underline">
+        <Link href="/connexion" className="font-medium text-yvann-gold-700 hover:underline">
           Se connecter
         </Link>
       </p>

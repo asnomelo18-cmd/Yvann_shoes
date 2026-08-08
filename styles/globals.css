@@ -39,6 +39,13 @@
   --yvann-warning: #d4af37;
   --yvann-danger: #c0392b;
 
+  /* Variantes "texte" — plus foncées que leurs équivalents "fond" pour
+     garantir un contraste AA (4.5:1 minimum) sur les fonds clairs. Le
+     site n'a pas de mode sombre actif : ces valeurs sont fixes. */
+  --yvann-warning-text: #92400e;
+  --yvann-success-text: #166534;
+  --yvann-bronze-text: #7a5c2e;
+
   /* Sémantique — light par défaut */
   --yvann-bg: var(--yvann-cream);
   --yvann-surface: var(--yvann-white-pure);

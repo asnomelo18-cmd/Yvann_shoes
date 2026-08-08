@@ -111,7 +111,7 @@ export default function ProductPage() {
 
           <div className="mt-2 flex items-center gap-3 text-sm text-text-muted">
             <span className="flex items-center gap-1">
-              <IconStar size={15} className="fill-yvann-warning text-yvann-warning" />
+              <IconStar size={15} className="fill-yvann-warning text-yvann-warningText" />
               {product.avgRating.toFixed(1)} ({product.reviews.length} avis)
             </span>
             <span>·</span>
@@ -219,7 +219,7 @@ export default function ProductPage() {
                   });
                 }
               }}
-              className={`rounded-full border p-3 ${isCompared ? "border-yvann-gold-600 text-yvann-gold-600" : "border-slate-300 text-text dark:border-slate-700"}`}
+              className={`rounded-full border p-3 ${isCompared ? "border-yvann-gold-600 text-yvann-gold-700" : "border-slate-300 text-text dark:border-slate-700"}`}
             >
               <IconGitCompare size={18} />
             </button>

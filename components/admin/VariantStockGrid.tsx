@@ -65,7 +65,7 @@ export function VariantStockGrid({
                       {qty === 0 && (
                         <IconAlertTriangle
                           size={14}
-                          className="shrink-0 text-yvann-warning"
+                          className="shrink-0 text-yvann-warningText"
                           aria-label="Rupture de stock"
                         />
                       )}
