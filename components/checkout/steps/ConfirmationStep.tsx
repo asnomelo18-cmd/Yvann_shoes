@@ -55,18 +55,18 @@ export function ConfirmationStep({
 
         <div className="mt-4 divide-y divide-slate-100 border-t border-slate-200 pt-2 dark:divide-slate-800 dark:border-slate-800">
           {lines.map((line) => (
-            <div key={line.variantId} className="flex justify-between py-2 text-sm">
-              <span className="text-text-muted">
+            <div key={line.variantId} className="flex flex-wrap justify-between gap-x-3 gap-y-0.5 py-2 text-sm">
+              <span className="min-w-0 flex-1 text-text-muted">
                 {line.name} × {line.quantity} ({line.size}, {line.color})
               </span>
-              <span className="text-text">{formatPrice(line.unitPrice * line.quantity)}</span>
+              <span className="shrink-0 break-words text-text">{formatPrice(line.unitPrice * line.quantity)}</span>
             </div>
           ))}
         </div>
 
-        <div className="mt-3 flex justify-between border-t border-slate-200 pt-3 text-base font-semibold text-text dark:border-slate-800">
+        <div className="mt-3 flex flex-wrap justify-between gap-x-3 border-t border-slate-200 pt-3 text-base font-semibold text-text dark:border-slate-800">
           <span>Total dû</span>
-          <span>{formatPrice(total)}</span>
+          <span className="break-words">{formatPrice(total)}</span>
         </div>
       </div>
 

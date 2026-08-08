@@ -42,7 +42,7 @@ export default function BoutiquePage() {
         </aside>
 
         <div className="flex-1">
-          <div className="mb-6 flex items-center justify-between gap-3">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <button
               onClick={() => setMobileFiltersOpen(true)}
               className="flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm text-text dark:border-slate-700 lg:hidden"

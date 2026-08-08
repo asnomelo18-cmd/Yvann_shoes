@@ -62,21 +62,23 @@ export default function AdminOrderDetailPage() {
       </div>
 
       {!["ANNULEE", "REMBOURSEE"].includes(order.status) && (
-        <div className="mt-6 flex items-center gap-1">
-          {ORDER_STATUS_FLOW.map((s, i) => (
-            <div key={s} className="flex flex-1 items-center">
-              <button
-                onClick={() => updateOrderStatus(s)}
-                className={cn(
-                  "flex h-8 flex-1 items-center justify-center rounded-full text-xs font-medium transition-colors",
-                  i <= currentStepIndex ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
-                )}
-              >
-                {ORDER_STATUS_LABELS[s]}
-              </button>
-              {i < ORDER_STATUS_FLOW.length - 1 && <div className="w-2" />}
-            </div>
-          ))}
+        <div className="mt-6 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+          <div className="flex items-center gap-1">
+            {ORDER_STATUS_FLOW.map((s, i) => (
+              <div key={s} className="flex flex-1 items-center">
+                <button
+                  onClick={() => updateOrderStatus(s)}
+                  className={cn(
+                    "flex h-8 min-w-[92px] flex-1 items-center justify-center whitespace-nowrap rounded-full px-2 text-xs font-medium transition-colors",
+                    i <= currentStepIndex ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
+                  )}
+                >
+                  {ORDER_STATUS_LABELS[s]}
+                </button>
+                {i < ORDER_STATUS_FLOW.length - 1 && <div className="w-2 shrink-0" />}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -85,14 +87,14 @@ export default function AdminOrderDetailPage() {
           <h3 className="mb-3 text-sm font-semibold text-text">Articles</h3>
           <div className="divide-y divide-slate-100 rounded-2xl border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
             {order.items.map((item: any) => (
-              <div key={item.id} className="flex items-center gap-4 p-4">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-text">{item.product.name}</p>
-                  <p className="text-xs text-text-muted">
+              <div key={item.id} className="flex flex-wrap items-center gap-3 p-4 sm:flex-nowrap sm:gap-4">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-text">{item.product.name}</p>
+                  <p className="truncate text-xs text-text-muted">
                     Pointure {item.variant.size.eu} · {item.variant.color.name} · Qté {item.quantity}
                   </p>
                 </div>
-                <span className="text-sm font-semibold text-text">
+                <span className="shrink-0 break-words text-sm font-semibold text-text">
                   {formatPrice(Number(item.unitPrice) * item.quantity)}
                 </span>
               </div>

@@ -149,18 +149,18 @@ export function PaymentStep({
         <p className="text-sm text-text">{activeMethod.instructions}</p>
 
         {activeMethod.payTo && (
-          <div className="mt-3 flex items-center justify-between rounded-xl bg-surface-2 px-4 py-3">
-            <div>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface-2 px-4 py-3">
+            <div className="min-w-0">
               <p className="text-xs text-text-muted">Montant à envoyer</p>
-              <p className="text-sm font-semibold text-text">{formatPrice(totalDue)}</p>
+              <p className="break-words text-sm font-semibold text-text">{formatPrice(totalDue)}</p>
               <p className="mt-1 text-xs text-text-muted">Destinataire</p>
-              <p className="text-sm font-medium text-text">{activeMethod.payTo}</p>
+              <p className="break-words text-sm font-medium text-text">{activeMethod.payTo}</p>
             </div>
             <button
               type="button"
               aria-label="Copier le numéro"
               onClick={copyPayTo}
-              className="rounded-full border border-slate-300 p-2 text-text dark:border-slate-700"
+              className="shrink-0 rounded-full border border-slate-300 p-2 text-text dark:border-slate-700"
             >
               <IconCopy size={16} />
             </button>

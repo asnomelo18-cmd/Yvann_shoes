@@ -303,8 +303,8 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
         />
       </section>
 
-      <div className="flex items-center justify-between">
-        <div className="flex gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap gap-3">
           <button
             type="submit"
             disabled={isSubmitting}

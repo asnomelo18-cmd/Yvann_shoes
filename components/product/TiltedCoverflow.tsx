@@ -57,7 +57,7 @@ export function TiltedCoverflow({ products }: { products: MockProduct[] }) {
                     {p.name}
                   </span>
                 </div>
-                <p className="mt-2 text-center text-xs text-text-muted">{formatPrice(p.basePrice)}</p>
+                <p className="mt-2 break-words text-center text-xs text-text-muted">{formatPrice(p.basePrice)}</p>
               </Link>
             </motion.div>
           );

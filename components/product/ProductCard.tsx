@@ -73,19 +73,19 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
         </button>
       </div>
 
-      <div className={view === "grid" ? "mt-3" : "flex-1"}>
-        <p className="text-xs text-text-muted">{product.brand}</p>
-        <h3 className="text-sm font-medium text-text">{product.name}</h3>
+      <div className={view === "grid" ? "mt-3 min-w-0" : "min-w-0 flex-1"}>
+        <p className="truncate text-xs text-text-muted">{product.brand}</p>
+        <h3 className="line-clamp-2 text-sm font-medium text-text">{product.name}</h3>
         <div className="mt-1 flex items-center gap-1 text-xs text-text-muted">
-          <IconStar size={13} className="fill-yvann-warning text-yvann-warningText" />
+          <IconStar size={13} className="shrink-0 fill-yvann-warning text-yvann-warningText" />
           {product.avgRating.toFixed(1)}
         </div>
-        <div className="mt-1.5 flex items-center gap-2">
-          <span className="text-sm font-semibold text-text">
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+          <span className="break-words text-sm font-semibold text-text">
             {formatPrice(product.basePrice)}
           </span>
           {product.compareAtPrice && (
-            <span className="text-xs text-text-muted line-through">
+            <span className="break-words text-xs text-text-muted line-through">
               {formatPrice(product.compareAtPrice)}
             </span>
           )}

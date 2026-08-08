@@ -14,15 +14,15 @@ export function CartLineItem({ line }: { line: CartLine }) {
         <img src={line.imageUrl} alt={line.name} className="h-full w-full object-cover" />
       </div>
 
-      <div className="flex flex-1 flex-col justify-between">
-        <div>
-          <p className="text-sm font-medium text-text">{line.name}</p>
-          <p className="text-xs text-text-muted">
+      <div className="flex min-w-0 flex-1 flex-col justify-between">
+        <div className="min-w-0">
+          <p className="truncate text-sm font-medium text-text">{line.name}</p>
+          <p className="truncate text-xs text-text-muted">
             Pointure {line.size} · {line.color}
           </p>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 rounded-full border border-slate-300 px-2 py-0.5 dark:border-slate-700">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex shrink-0 items-center gap-2 rounded-full border border-slate-300 px-2 py-0.5 dark:border-slate-700">
             <button
               aria-label="Diminuer la quantité"
               onClick={() => setQuantity(line.variantId, Math.max(1, line.quantity - 1))}
@@ -39,7 +39,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
               <IconPlus size={12} />
             </button>
           </div>
-          <span className="text-sm font-semibold text-text">
+          <span className="break-words text-sm font-semibold text-text">
             {formatPrice(line.unitPrice * line.quantity)}
           </span>
         </div>

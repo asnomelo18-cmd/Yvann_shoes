@@ -107,22 +107,22 @@ export default function ProductPage() {
 
         <div>
           <p className="text-sm text-text-muted">{product.brand}</p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-text">{product.name}</h1>
+          <h1 className="mt-1 break-words text-2xl font-semibold tracking-tight text-text sm:text-3xl">{product.name}</h1>
 
-          <div className="mt-2 flex items-center gap-3 text-sm text-text-muted">
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-text-muted">
             <span className="flex items-center gap-1">
-              <IconStar size={15} className="fill-yvann-warning text-yvann-warningText" />
+              <IconStar size={15} className="shrink-0 fill-yvann-warning text-yvann-warningText" />
               {product.avgRating.toFixed(1)} ({product.reviews.length} avis)
             </span>
-            <span>·</span>
-            <span>Réf. {product.sku}</span>
+            <span className="hidden sm:inline">·</span>
+            <span className="break-words">Réf. {product.sku}</span>
           </div>
 
-          <div className="mt-4 flex items-center gap-3">
-            <span className="text-2xl font-semibold text-text">{formatPrice(product.basePrice)}</span>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <span className="break-words text-2xl font-semibold text-text">{formatPrice(product.basePrice)}</span>
             {product.compareAtPrice && (
               <>
-                <span className="text-base text-text-muted line-through">
+                <span className="break-words text-base text-text-muted line-through">
                   {formatPrice(product.compareAtPrice)}
                 </span>
                 <span className="rounded-full bg-yvann-danger px-2 py-0.5 text-xs font-semibold text-white">

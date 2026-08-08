@@ -101,9 +101,9 @@ export function FilterPanel({
             <Slider.Thumb className="block h-4 w-4 rounded-full bg-yvann-gold-600 shadow focus:outline-none focus:ring-2 focus:ring-yvann-gold-400" />
             <Slider.Thumb className="block h-4 w-4 rounded-full bg-yvann-gold-600 shadow focus:outline-none focus:ring-2 focus:ring-yvann-gold-400" />
           </Slider.Root>
-          <div className="mt-2 flex justify-between text-xs text-text-muted">
-            <span>{formatPrice(filters.priceRange[0])}</span>
-            <span>{formatPrice(filters.priceRange[1])}</span>
+          <div className="mt-2 flex flex-wrap justify-between gap-x-2 text-xs text-text-muted">
+            <span className="break-words">{formatPrice(filters.priceRange[0])}</span>
+            <span className="break-words">{formatPrice(filters.priceRange[1])}</span>
           </div>
         </div>
       </FilterGroup>

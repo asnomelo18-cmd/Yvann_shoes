@@ -123,7 +123,7 @@ export function Header() {
             >
               <IconHeart size={20} />
               {wishlistCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-600 text-[10px] font-semibold text-yvann-black-950">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-yvann-gold-600 px-0.5 text-[10px] font-semibold text-yvann-black-950">
                   {wishlistCount}
                 </span>
               )}
@@ -135,7 +135,7 @@ export function Header() {
             >
               <IconGitCompare size={20} />
               {compareCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-600 text-[10px] font-semibold text-yvann-black-950">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-yvann-gold-600 px-0.5 text-[10px] font-semibold text-yvann-black-950">
                   {compareCount}
                 </span>
               )}
@@ -147,7 +147,7 @@ export function Header() {
             >
               <IconShoppingBag size={20} />
               {cartCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-yvann-gold-500 text-[10px] font-semibold text-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-yvann-gold-500 px-0.5 text-[10px] font-semibold text-white">
                   {cartCount}
                 </span>
               )}

@@ -49,27 +49,27 @@ export function OrderSummary({
       </div>
 
       <dl className="mt-5 space-y-2 text-sm">
-        <div className="flex justify-between text-text-muted">
+        <div className="flex flex-wrap justify-between gap-x-2 text-text-muted">
           <dt>Sous-total</dt>
-          <dd>{formatPrice(subtotal)}</dd>
+          <dd className="break-words">{formatPrice(subtotal)}</dd>
         </div>
-        <div className="flex justify-between text-text-muted">
+        <div className="flex flex-wrap justify-between gap-x-2 text-text-muted">
           <dt>Livraison estimée</dt>
-          <dd>{formatPrice(shipping)}</dd>
+          <dd className="break-words">{formatPrice(shipping)}</dd>
         </div>
-        <div className="flex justify-between text-text-muted">
+        <div className="flex flex-wrap justify-between gap-x-2 text-text-muted">
           <dt>Taxes</dt>
-          <dd>{formatPrice(tax)}</dd>
+          <dd className="break-words">{formatPrice(tax)}</dd>
         </div>
         {discount > 0 && (
-          <div className="flex justify-between text-yvann-successText">
+          <div className="flex flex-wrap justify-between gap-x-2 text-yvann-successText">
             <dt>Réduction</dt>
-            <dd>-{formatPrice(discount)}</dd>
+            <dd className="break-words">-{formatPrice(discount)}</dd>
           </div>
         )}
-        <div className="flex justify-between border-t border-slate-200 pt-2 text-base font-semibold text-text dark:border-slate-800">
+        <div className="flex flex-wrap justify-between gap-x-2 border-t border-slate-200 pt-2 text-base font-semibold text-text dark:border-slate-800">
           <dt>Total</dt>
-          <dd>{formatPrice(total)}</dd>
+          <dd className="break-words">{formatPrice(total)}</dd>
         </div>
       </dl>
 

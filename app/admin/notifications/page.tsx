@@ -64,9 +64,9 @@ export default function AdminNotificationsPage() {
                 )}
               >
                 <Icon size={18} className="mt-0.5 shrink-0 text-yvann-gold-700" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-text">{n.title}</p>
-                  <p className="text-sm text-text-muted">{n.body}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="break-words text-sm font-medium text-text">{n.title}</p>
+                  <p className="break-words text-sm text-text-muted">{n.body}</p>
                   <p className="mt-1 text-xs text-text-muted">
                     {n.customerName} · {n.channel} ·{" "}
                     {new Date(n.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}

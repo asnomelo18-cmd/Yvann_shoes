@@ -6,7 +6,7 @@ import type { ProductDetail } from "@/lib/mock-product-details";
 export function ProductTabs({ product }: { product: ProductDetail }) {
   return (
     <Tabs.Root defaultValue="description" className="mt-14">
-      <Tabs.List className="flex gap-6 border-b border-slate-200 dark:border-slate-800">
+      <Tabs.List className="flex gap-6 overflow-x-auto border-b border-slate-200 dark:border-slate-800">
         {[
           { value: "description", label: "Description" },
           { value: "materials", label: "Matières & entretien" },
@@ -17,7 +17,7 @@ export function ProductTabs({ product }: { product: ProductDetail }) {
           <Tabs.Trigger
             key={tab.value}
             value={tab.value}
-            className="border-b-2 border-transparent pb-3 text-sm font-medium text-text-muted data-[state=active]:border-yvann-gold-600 data-[state=active]:text-text"
+            className="shrink-0 whitespace-nowrap border-b-2 border-transparent pb-3 text-sm font-medium text-text-muted data-[state=active]:border-yvann-gold-600 data-[state=active]:text-text"
           >
             {tab.label}
           </Tabs.Trigger>
@@ -27,23 +27,23 @@ export function ProductTabs({ product }: { product: ProductDetail }) {
       <Tabs.Content value="description" className="max-w-2xl py-6 text-sm leading-relaxed text-text-muted">
         {product.description}
         <dl className="mt-6 grid grid-cols-2 gap-4 text-text">
-          <div>
+          <div className="min-w-0">
             <dt className="text-xs text-text-muted">Référence</dt>
-            <dd className="font-medium">{product.sku}</dd>
+            <dd className="break-words font-medium">{product.sku}</dd>
           </div>
-          <div>
+          <div className="min-w-0">
             <dt className="text-xs text-text-muted">Poids</dt>
-            <dd className="font-medium">{product.weightGrams} g</dd>
+            <dd className="break-words font-medium">{product.weightGrams} g</dd>
           </div>
           {product.drop && (
-            <div>
+            <div className="min-w-0">
               <dt className="text-xs text-text-muted">Drop</dt>
-              <dd className="font-medium">{product.drop} mm</dd>
+              <dd className="break-words font-medium">{product.drop} mm</dd>
             </div>
           )}
-          <div>
+          <div className="min-w-0">
             <dt className="text-xs text-text-muted">Semelle</dt>
-            <dd className="font-medium">{product.soleType}</dd>
+            <dd className="break-words font-medium">{product.soleType}</dd>
           </div>
         </dl>
       </Tabs.Content>

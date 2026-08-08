@@ -49,11 +49,13 @@ export function DeliveryStep({
               checked={selected === zone.name}
               onChange={() => setValue("zoneName", zone.name)}
             />
-            <IconTruckDelivery size={22} className="text-yvann-gold-700" />
-            <div className="flex-1">
-              <p className="text-sm font-medium text-text">{zone.name}</p>
+            <IconTruckDelivery size={22} className="shrink-0 text-yvann-gold-700" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium text-text">{zone.name}</p>
             </div>
-            <span className="text-sm font-semibold text-text">{formatPrice(zone.price)}</span>
+            <span className="shrink-0 break-words text-right text-sm font-semibold text-text">
+              {formatPrice(zone.price)}
+            </span>
           </label>
         ))}
         {zones.length === 0 && (

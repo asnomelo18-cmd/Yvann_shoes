@@ -56,18 +56,18 @@ export default function ComptePage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-text">Mon compte</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-2xl font-semibold tracking-tight text-text sm:text-3xl">Mon compte</h1>
           {session && (
-            <p className="mt-1 text-sm text-text-muted">
+            <p className="mt-1 truncate text-sm text-text-muted">
               {session.firstName} {session.lastName} · {session.email}
             </p>
           )}
         </div>
         <button
           onClick={() => logout.mutate()}
-          className="flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-text hover:border-yvann-danger hover:text-yvann-danger dark:border-slate-700"
+          className="flex shrink-0 items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-text hover:border-yvann-danger hover:text-yvann-danger dark:border-slate-700"
         >
           <IconLogout size={16} /> Déconnexion
         </button>

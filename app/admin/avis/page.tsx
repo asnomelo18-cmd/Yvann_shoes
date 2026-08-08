@@ -95,8 +95,8 @@ export default function AdminAvisPage() {
         ) : (
           reviews.map((r) => (
             <div key={r.id} className="rounded-2xl border border-slate-200 p-4 dark:border-slate-800">
-              <div className="flex items-start justify-between gap-4">
-                <div>
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <div className="flex">
                       {Array.from({ length: 5 }).map((_, i) => (
