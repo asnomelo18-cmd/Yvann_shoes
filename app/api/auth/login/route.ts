@@ -28,8 +28,8 @@ export async function POST(request: Request) {
       // avant d'émettre les tokens définitifs.
     }
 
-    const accessToken = signAccessToken({ sub: user.id, role: user.role });
-    const refreshToken = signRefreshToken({ sub: user.id, role: user.role });
+    const accessToken = await signAccessToken({ sub: user.id, role: user.role });
+    const refreshToken = await signRefreshToken({ sub: user.id, role: user.role });
 
     await prisma.refreshToken.create({
       data: {

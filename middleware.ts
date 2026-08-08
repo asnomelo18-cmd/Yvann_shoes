@@ -4,21 +4,28 @@ import { verifyAccessToken } from "@/lib/auth";
 
 const ADMIN_ROLES = ["ADMIN", "MANAGER", "SUPPORT", "VENDEUR"];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/admin") || pathname.startsWith("/compte")) {
     const token = request.cookies.get("yvann_access_token")?.value;
+
     if (!token) {
-      return NextResponse.redirect(new URL("/connexion", request.url));
+      const loginUrl = new URL("/connexion", request.url);
+      loginUrl.searchParams.set("next", pathname);
+      return NextResponse.redirect(loginUrl);
     }
+
     try {
-      const payload = verifyAccessToken(token);
-      if (!ADMIN_ROLES.includes(payload.role)) {
+      const payload = await verifyAccessToken(token);
+
+      if (pathname.startsWith("/admin") && !ADMIN_ROLES.includes(payload.role)) {
         return NextResponse.redirect(new URL("/", request.url));
       }
     } catch {
-      return NextResponse.redirect(new URL("/connexion", request.url));
+      const loginUrl = new URL("/connexion", request.url);
+      loginUrl.searchParams.set("next", pathname);
+      return NextResponse.redirect(loginUrl);
     }
   }
 

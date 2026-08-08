@@ -7,7 +7,7 @@ export async function getSessionUser() {
   if (!token) return null;
 
   try {
-    const payload = verifyAccessToken(token);
+    const payload = await verifyAccessToken(token);
     const user = await prisma.user.findUnique({ where: { id: payload.sub } });
     return user;
   } catch {
