@@ -117,7 +117,7 @@ export default function AdminAvisPage() {
                   <p className="text-sm text-text-muted">{r.comment}</p>
                   <p className="mt-2 text-xs text-text-muted">
                     {r.customerName} · sur{" "}
-                    <Link href={`/produit/${r.productSlug}`} className="text-yvann-gold-700 hover:underline">
+                    <Link href={`/produit/${r.productSlug}`} className="text-yvann-gold-text hover:underline">
                       {r.productName}
                     </Link>{" "}
                     · {new Date(r.createdAt).toLocaleDateString("fr-FR")}

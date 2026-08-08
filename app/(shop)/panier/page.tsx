@@ -22,7 +22,7 @@ export default function PanierPage() {
           <p className="text-text-muted">Votre panier est vide pour le moment.</p>
           <Link
             href="/boutique"
-            className="rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
+            className="rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500"
           >
             Découvrir la boutique
           </Link>

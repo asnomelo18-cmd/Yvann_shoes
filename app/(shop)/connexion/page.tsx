@@ -51,7 +51,7 @@ function ConnexionForm() {
             <label className="mb-1.5 block text-xs font-medium text-text-muted">
               Mot de passe
             </label>
-            <Link href="/mot-de-passe-oublie" className="text-xs text-yvann-gold-700 hover:underline">
+            <Link href="/mot-de-passe-oublie" className="text-xs text-yvann-gold-text hover:underline">
               Mot de passe oublié ?
             </Link>
           </div>
@@ -68,7 +68,7 @@ function ConnexionForm() {
         <button
           type="submit"
           disabled={login.isPending}
-          className="w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700 disabled:opacity-60"
+          className="w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500 disabled:opacity-60"
         >
           {login.isPending ? "Connexion..." : "Se connecter"}
         </button>
@@ -76,7 +76,7 @@ function ConnexionForm() {
 
       <p className="mt-6 text-center text-sm text-text-muted">
         Pas encore de compte ?{" "}
-        <Link href="/inscription" className="font-medium text-yvann-gold-700 hover:underline">
+        <Link href="/inscription" className="font-medium text-yvann-gold-text hover:underline">
           Créer un compte
         </Link>
       </p>

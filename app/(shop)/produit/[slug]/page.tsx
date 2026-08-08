@@ -181,7 +181,7 @@ export default function ProductPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <button
               onClick={handleAddToCart}
-              className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700"
+              className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-yvann-black-950 transition-colors hover:bg-yvann-gold-500"
             >
               <IconShoppingBagPlus size={17} /> Ajouter au panier
             </button>
@@ -219,7 +219,7 @@ export default function ProductPage() {
                   });
                 }
               }}
-              className={`rounded-full border p-3 ${isCompared ? "border-yvann-gold-600 text-yvann-gold-700" : "border-slate-300 text-text dark:border-slate-700"}`}
+              className={`rounded-full border p-3 ${isCompared ? "border-yvann-gold-600 text-yvann-gold-text" : "border-slate-300 text-text dark:border-slate-700"}`}
             >
               <IconGitCompare size={18} />
             </button>

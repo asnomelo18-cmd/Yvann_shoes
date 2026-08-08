@@ -21,8 +21,8 @@ export function Stepper({ steps, currentIndex }: { steps: StepperStep[]; current
               <div
                 className={cn(
                   "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors sm:h-8 sm:w-8",
-                  isDone && "border-yvann-gold-600 bg-yvann-gold-600 text-white",
-                  isActive && "border-yvann-gold-600 text-yvann-gold-700",
+                  isDone && "border-yvann-gold-600 bg-yvann-gold-600 text-yvann-black-950",
+                  isActive && "border-yvann-gold-600 text-yvann-gold-text",
                   !isDone && !isActive && "border-slate-300 text-text-muted dark:border-slate-700"
                 )}
               >

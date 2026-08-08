@@ -19,7 +19,7 @@ interface AdminUser {
 const ROLE_OPTIONS = ["CLIENT", "VENDEUR", "SUPPORT", "MANAGER", "ADMIN"];
 const ROLE_TONE: Record<string, string> = {
   ADMIN: "bg-yvann-danger/15 text-yvann-danger",
-  MANAGER: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  MANAGER: "bg-yvann-gold-500/15 text-yvann-gold-text",
   SUPPORT: "bg-yvann-bronze-500/15 text-yvann-bronzeText",
   VENDEUR: "bg-yvann-success/15 text-yvann-successText",
   CLIENT: "bg-slate-400/15 text-text-muted",

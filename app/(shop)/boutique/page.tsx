@@ -56,14 +56,14 @@ export default function BoutiquePage() {
                 <button
                   aria-label="Vue grille"
                   onClick={() => setView("grid")}
-                  className={`rounded-full p-1.5 ${view === "grid" ? "bg-yvann-gold-600 text-white" : "text-text-muted"}`}
+                  className={`rounded-full p-1.5 ${view === "grid" ? "bg-yvann-gold-600 text-yvann-black-950" : "text-text-muted"}`}
                 >
                   <IconLayoutGrid size={16} />
                 </button>
                 <button
                   aria-label="Vue liste"
                   onClick={() => setView("list")}
-                  className={`rounded-full p-1.5 ${view === "list" ? "bg-yvann-gold-600 text-white" : "text-text-muted"}`}
+                  className={`rounded-full p-1.5 ${view === "list" ? "bg-yvann-gold-600 text-yvann-black-950" : "text-text-muted"}`}
                 >
                   <IconList size={16} />
                 </button>
@@ -140,7 +140,7 @@ export default function BoutiquePage() {
             <FilterPanel filters={filters} onChange={updateFilters} />
             <button
               onClick={() => setMobileFiltersOpen(false)}
-              className="mt-8 w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white"
+              className="mt-8 w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-yvann-black-950"
             >
               Voir les résultats
             </button>

@@ -74,7 +74,7 @@ export function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-slate-300 p-2 text-text-muted transition-colors hover:border-yvann-gold-500 hover:text-yvann-gold-700 dark:border-slate-700"
+                  className="rounded-full border border-slate-300 p-2 text-text-muted transition-colors hover:border-yvann-gold-500 hover:text-yvann-gold-text dark:border-slate-700"
                 >
                   <Icon size={18} />
                 </a>

@@ -75,7 +75,7 @@ function SidebarContent({
               className={cn(
                 "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-yvann-gold-600 text-white"
+                  ? "bg-yvann-gold-600 text-yvann-black-950"
                   : "text-text-muted hover:bg-surface-2 hover:text-text"
               )}
             >

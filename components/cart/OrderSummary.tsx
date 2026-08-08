@@ -76,7 +76,7 @@ export function OrderSummary({
       <button
         onClick={onCta}
         disabled={subtotal === 0}
-        className="mt-5 w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700 disabled:opacity-40"
+        className="mt-5 w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-yvann-black-950 transition-colors hover:bg-yvann-gold-500 disabled:opacity-40"
       >
         {ctaLabel}
       </button>

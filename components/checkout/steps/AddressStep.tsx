@@ -52,7 +52,7 @@ export function AddressStep({
 
       <button
         type="submit"
-        className="mt-8 rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
+        className="mt-8 rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500"
       >
         Continuer vers la livraison
       </button>

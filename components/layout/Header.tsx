@@ -147,7 +147,7 @@ export function Header() {
             >
               <IconShoppingBag size={20} />
               {cartCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-yvann-gold-500 px-0.5 text-[10px] font-semibold text-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-yvann-gold-500 px-0.5 text-[10px] font-semibold text-yvann-black-950">
                   {cartCount}
                 </span>
               )}
@@ -261,7 +261,7 @@ export function Header() {
                     </Link>
                     <Link
                       href="/inscription"
-                      className="flex flex-1 items-center justify-center gap-2 rounded-full bg-yvann-gold-600 py-2.5 text-center text-sm font-semibold text-white"
+                      className="flex flex-1 items-center justify-center gap-2 rounded-full bg-yvann-gold-600 py-2.5 text-center text-sm font-semibold text-yvann-black-950"
                     >
                       <IconUser size={16} /> Créer un compte
                     </Link>

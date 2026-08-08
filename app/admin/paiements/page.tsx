@@ -94,7 +94,7 @@ export default function AdminPaiementsPage() {
             onClick={() => setTab(t.value)}
             className={cn(
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              tab === t.value ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
+              tab === t.value ? "bg-yvann-gold-600 text-yvann-black-950" : "border border-slate-300 text-text-muted dark:border-slate-700"
             )}
           >
             {t.label}

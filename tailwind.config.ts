@@ -31,6 +31,7 @@ const config: Config = {
             600: "var(--yvann-gold-600)",
             500: "var(--yvann-gold-500)",
             400: "var(--yvann-gold-400)",
+            text: "var(--yvann-gold-text)",
           },
           bronze: {
             500: "var(--yvann-bronze-500)",

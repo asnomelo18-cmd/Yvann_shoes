@@ -40,7 +40,7 @@ export function Newsletter() {
           <button
             type="submit"
             aria-label="S'inscrire"
-            className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-yvann-gold-700"
+            className="flex items-center gap-2 rounded-full bg-yvann-gold-600 px-4 py-2.5 text-sm font-semibold text-yvann-black-950 transition-colors hover:bg-yvann-gold-500"
           >
             <IconSend2 size={16} />
           </button>

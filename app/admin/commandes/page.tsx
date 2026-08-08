@@ -18,9 +18,9 @@ const ORDER_STATUS_LABELS: Record<string, string> = {
 
 const STATUS_TONE: Record<string, string> = {
   EN_ATTENTE: "bg-yvann-warning/15 text-yvann-warningText",
-  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-text",
   PREPARATION: "bg-yvann-bronze-500/15 text-yvann-bronzeText",
-  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-text",
   LIVREE: "bg-yvann-success/15 text-yvann-successText",
   ANNULEE: "bg-yvann-danger/15 text-yvann-danger",
   REMBOURSEE: "bg-slate-400/15 text-text-muted",
@@ -48,7 +48,7 @@ export default function AdminCommandesPage() {
             onClick={() => setTab(t.value)}
             className={cn(
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              tab === t.value ? "bg-yvann-gold-600 text-white" : "border border-slate-300 text-text-muted dark:border-slate-700"
+              tab === t.value ? "bg-yvann-gold-600 text-yvann-black-950" : "border border-slate-300 text-text-muted dark:border-slate-700"
             )}
           >
             {t.label}

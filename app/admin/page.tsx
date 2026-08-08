@@ -37,7 +37,7 @@ export default function AdminOverviewPage() {
             </div>
             <Link
               href="/admin/paiements"
-              className="rounded-full bg-yvann-gold-600 px-4 py-2 text-sm font-semibold text-white hover:bg-yvann-gold-700"
+              className="rounded-full bg-yvann-gold-600 px-4 py-2 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500"
             >
               Traiter maintenant
             </Link>

@@ -26,9 +26,9 @@ const ORDER_STATUS_LABELS: Record<string, string> = {
 
 const STATUS_TONE: Record<string, string> = {
   EN_ATTENTE: "bg-yvann-warning/15 text-yvann-warningText",
-  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  PAYEE: "bg-yvann-gold-500/15 text-yvann-gold-text",
   PREPARATION: "bg-yvann-bronze-500/15 text-yvann-bronzeText",
-  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-700",
+  EXPEDIEE: "bg-yvann-gold-500/15 text-yvann-gold-text",
   LIVREE: "bg-yvann-success/15 text-yvann-successText",
   ANNULEE: "bg-yvann-danger/15 text-yvann-danger",
   REMBOURSEE: "bg-slate-400/15 text-text-muted",
@@ -86,7 +86,7 @@ export default function ComptePage() {
               href={item.href}
               className="rounded-2xl border border-slate-200 p-5 text-text-muted transition-colors hover:border-yvann-gold-500 dark:border-slate-800"
             >
-              <item.icon size={22} className="text-yvann-gold-700" />
+              <item.icon size={22} className="text-yvann-gold-text" />
               <p className="mt-3 text-sm font-medium text-text">{item.label}</p>
               <p className="text-xs">{item.desc}</p>
             </Link>
@@ -95,7 +95,7 @@ export default function ComptePage() {
               key={item.label}
               className="rounded-2xl border border-slate-200 p-5 text-text-muted dark:border-slate-800"
             >
-              <item.icon size={22} className="text-yvann-gold-700" />
+              <item.icon size={22} className="text-yvann-gold-text" />
               <p className="mt-3 text-sm font-medium text-text">{item.label}</p>
               <p className="text-xs">{item.desc}</p>
               <p className="mt-2 text-xs italic text-text-muted">Bientôt disponible</p>
@@ -131,7 +131,7 @@ export default function ComptePage() {
                 <tr>
                   <td colSpan={5} className="px-4 py-10 text-center text-text-muted">
                     Aucune commande pour l'instant —{" "}
-                    <Link href="/boutique" className="text-yvann-gold-700 hover:underline">
+                    <Link href="/boutique" className="text-yvann-gold-text hover:underline">
                       découvrir la boutique
                     </Link>
                   </td>

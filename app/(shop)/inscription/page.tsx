@@ -98,7 +98,7 @@ export default function InscriptionPage() {
         <button
           type="submit"
           disabled={registerMutation.isPending}
-          className="w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700 disabled:opacity-60"
+          className="w-full rounded-full bg-yvann-gold-600 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500 disabled:opacity-60"
         >
           {registerMutation.isPending ? "Création..." : "Créer mon compte"}
         </button>
@@ -106,7 +106,7 @@ export default function InscriptionPage() {
 
       <p className="mt-6 text-center text-sm text-text-muted">
         Déjà un compte ?{" "}
-        <Link href="/connexion" className="font-medium text-yvann-gold-700 hover:underline">
+        <Link href="/connexion" className="font-medium text-yvann-gold-text hover:underline">
           Se connecter
         </Link>
       </p>
