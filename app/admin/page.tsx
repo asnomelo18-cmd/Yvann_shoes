@@ -23,9 +23,9 @@ export default function AdminOverviewPage() {
 
       {pending.length > 0 && (
         <div className="mt-8 rounded-2xl border border-yvann-warning/30 bg-yvann-warning/5 p-5">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <IconClockHour4 className="text-yvann-warningText" size={22} />
+              <IconClockHour4 className="shrink-0 text-yvann-warningText" size={22} />
               <div>
                 <p className="text-sm font-medium text-text">
                   {pending.length} paiement{pending.length > 1 ? "s" : ""} en attente de validation

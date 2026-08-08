@@ -16,6 +16,7 @@ import {
   IconBell,
   IconSettings,
   IconChartBar,
+  IconX,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
@@ -35,15 +36,32 @@ const SECTIONS = [
   { label: "Paramètres", href: "/admin/parametres", icon: IconSettings },
 ];
 
-export function AdminSidebar() {
+function SidebarContent({
+  onNavigate,
+  onClose,
+}: {
+  onNavigate?: () => void;
+  onClose?: () => void;
+}) {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 bg-surface dark:border-slate-800 lg:flex">
-      <div className="flex h-16 items-center gap-2 border-b border-slate-200 px-6 dark:border-slate-800">
-        <img src="/logo/yvann-mark-dark.svg" alt="Yvann" className="h-6 w-auto dark:hidden" />
-        <img src="/logo/yvann-mark.svg" alt="Yvann" className="hidden h-6 w-auto dark:block" />
-        <span className="text-xs font-medium text-text-muted">Admin</span>
+    <>
+      <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-slate-200 px-6 dark:border-slate-800">
+        <div className="flex items-center gap-2">
+          <img src="/logo/yvann-mark-dark.svg" alt="Yvann" className="h-6 w-auto dark:hidden" />
+          <img src="/logo/yvann-mark.svg" alt="Yvann" className="hidden h-6 w-auto dark:block" />
+          <span className="text-xs font-medium text-text-muted">Admin</span>
+        </div>
+        {onClose && (
+          <button
+            aria-label="Fermer le menu"
+            onClick={onClose}
+            className="rounded-full p-1 text-text-muted hover:text-text lg:hidden"
+          >
+            <IconX size={20} />
+          </button>
+        )}
       </div>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 py-4">
@@ -53,6 +71,7 @@ export function AdminSidebar() {
             <Link
               key={section.href}
               href={section.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
@@ -66,6 +85,33 @@ export function AdminSidebar() {
           );
         })}
       </nav>
-    </aside>
+    </>
+  );
+}
+
+export function AdminSidebar({
+  mobileOpen = false,
+  onClose,
+}: {
+  mobileOpen?: boolean;
+  onClose?: () => void;
+}) {
+  return (
+    <>
+      {/* Sidebar desktop, toujours visible à partir de lg */}
+      <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 bg-surface dark:border-slate-800 lg:flex">
+        <SidebarContent />
+      </aside>
+
+      {/* Drawer mobile/tablette, ouvert via le bouton menu de la topbar */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[70] lg:hidden">
+          <div className="absolute inset-0 bg-black/40" onClick={onClose} />
+          <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col bg-surface shadow-2xl">
+            <SidebarContent onNavigate={onClose} onClose={onClose} />
+          </aside>
+        </div>
+      )}
+    </>
   );
 }

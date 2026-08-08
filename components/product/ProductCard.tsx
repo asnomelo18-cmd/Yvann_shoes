@@ -62,8 +62,8 @@ export function ProductCard({ product, view = "grid" }: { product: MockProduct; 
         <button
           aria-label={isWishlisted ? "Retirer des favoris" : "Ajouter aux favoris"}
           onClick={handleToggleWishlist}
-          className={`absolute right-2 top-2 rounded-full p-1.5 transition-opacity ${
-            isWishlisted ? "bg-white/90 opacity-100" : "bg-white/90 opacity-0 group-hover:opacity-100"
+          className={`absolute right-2 top-2 rounded-full p-1.5 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 ${
+            isWishlisted ? "bg-white/90 sm:opacity-100" : "bg-white/90"
           }`}
         >
           <IconHeart

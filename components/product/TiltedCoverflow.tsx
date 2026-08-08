@@ -17,18 +17,18 @@ export function TiltedCoverflow({ products }: { products: MockProduct[] }) {
   if (products.length === 0) return null;
 
   return (
-    <div className="relative mx-auto flex max-w-3xl items-center justify-center gap-4 py-8">
+    <div className="relative mx-auto flex max-w-3xl items-center justify-center gap-2 py-8 sm:gap-4">
       <button
         aria-label="Précédent"
         onClick={() => go(-1)}
         disabled={index === 0}
-        className="liquid-glass shrink-0 rounded-full p-2 text-text disabled:opacity-30"
+        className="liquid-glass shrink-0 rounded-full p-1.5 text-text disabled:opacity-30 sm:p-2"
       >
         <IconChevronLeft size={18} />
       </button>
 
       <div
-        className="flex items-center gap-4 overflow-hidden"
+        className="flex items-center gap-2 overflow-hidden sm:gap-4"
         tabIndex={0}
         onKeyDown={(e) => {
           if (e.key === "ArrowLeft") go(-1);
@@ -47,7 +47,7 @@ export function TiltedCoverflow({ products }: { products: MockProduct[] }) {
                 x: offset * -8,
               }}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
-              className="w-40 shrink-0"
+              className="w-28 shrink-0 sm:w-40"
             >
               <Link href={`/produit/${p.slug}`}>
                 <div className="relative aspect-square overflow-hidden rounded-2xl bg-[var(--yvann-cream)] dark:bg-[var(--yvann-black-950)]">
