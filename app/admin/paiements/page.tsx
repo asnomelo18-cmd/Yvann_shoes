@@ -26,7 +26,7 @@ const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
   EN_ATTENTE: { label: "En attente", className: "bg-yvann-warning/15 text-yvann-warningText" },
   VALIDE: { label: "Validé", className: "bg-yvann-success/15 text-yvann-successText" },
   ECHOUE: { label: "Échoué", className: "bg-yvann-danger/15 text-yvann-danger" },
-  REMBOURSE: { label: "Remboursé", className: "bg-yvann-charcoal-500/15 text-text-muted" },
+  REMBOURSE: { label: "Remboursé", className: "bg-slate-500/15 text-text-muted" },
 };
 
 const TABS: { value: string; label: string }[] = [

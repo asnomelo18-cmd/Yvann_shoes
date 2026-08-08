@@ -10,42 +10,45 @@
 }
 
 :root {
-  /* Neutres noir/charbon (base UI) */
-  --yvann-black-950: #0a0a0b;
-  --yvann-black-900: #141416;
-  --yvann-charcoal-800: #1f1f22;
-  --yvann-charcoal-700: #2c2c30;
-  --yvann-charcoal-600: #3f3f45;
-  --yvann-charcoal-500: #5c5c63;
-  --yvann-charcoal-400: #86868d;
-  --yvann-charcoal-300: #b3b3b8;
-  --yvann-charcoal-200: #d9d9dc;
-  --yvann-charcoal-100: #ede9e3;
-  --yvann-cream: #f5f1e8;
-  --yvann-white-pure: #ffffff;
+  /* Neutres noir/charbon (base UI) — format "R G B" pour permettre à
+     Tailwind d'appliquer les modificateurs d'opacité (ex: /80, /15) via
+     rgb(var(--x) / <alpha-value>). Un simple #hex ne le permet pas et
+     fait disparaître silencieusement la classe générée. */
+  --yvann-black-950: 10 10 11;
+  --yvann-black-900: 20 20 22;
+  --yvann-charcoal-800: 31 31 34;
+  --yvann-charcoal-700: 44 44 48;
+  --yvann-charcoal-600: 63 63 69;
+  --yvann-charcoal-500: 92 92 99;
+  --yvann-charcoal-400: 134 134 141;
+  --yvann-charcoal-300: 179 179 184;
+  --yvann-charcoal-200: 217 217 220;
+  --yvann-charcoal-100: 237 233 227;
+  --yvann-cream: 245 241 232;
+  --yvann-white-pure: 255 255 255;
 
   /* Accent principal — or (identité de la marque) */
-  --yvann-gold-700: #96741f;
-  --yvann-gold-600: #c9a227; /* couleur de marque principale */
-  --yvann-gold-500: #d4af37;
-  --yvann-gold-400: #e4c767;
+  --yvann-gold-700: 150 116 31;
+  --yvann-gold-600: 201 162 39; /* couleur de marque principale */
+  --yvann-gold-500: 212 175 55;
+  --yvann-gold-400: 228 199 103;
 
   /* Accent secondaire — bronze (badges, highlights) */
-  --yvann-bronze-500: #b08d57;
-  --yvann-bronze-400: #c9a96e;
+  --yvann-bronze-500: 176 141 87;
+  --yvann-bronze-400: 201 169 110;
 
   /* États */
-  --yvann-success: #2f9e5b;
-  --yvann-warning: #d4af37;
-  --yvann-danger: #c0392b;
+  --yvann-success: 47 158 91;
+  --yvann-warning: 212 175 55;
+  --yvann-danger: 192 57 43;
 
-  /* Variantes "texte" — plus foncées/claires que leurs équivalents "fond" pour
+  /* Variantes "texte" — plus foncées que leurs équivalents "fond" pour
      garantir un contraste AA (4.5:1 minimum) sur les fonds clairs. Le
      site n'a pas de mode sombre actif : ces valeurs sont fixes. */
-  --yvann-warning-text: #92400e;
-  --yvann-success-text: #166534;
-  --yvann-bronze-text: #7a5c2e;
-  --yvann-gold-text: #7d601a; /* or plus foncé que gold-700, lisible en petit texte (AA) */
+  --yvann-warning-text: 146 64 14;
+  --yvann-success-text: 22 101 52;
+  --yvann-bronze-text: 122 92 46;
+  --yvann-gold-text: 125 96 26; /* or plus foncé que gold-700, lisible en petit texte (AA) */
 
   /* Sémantique — light par défaut */
   --yvann-bg: var(--yvann-cream);
@@ -64,7 +67,7 @@
   --yvann-surface-2: var(--yvann-charcoal-800);
   --yvann-text: var(--yvann-cream);
   --yvann-text-muted: var(--yvann-charcoal-300);
-  --yvann-gold-text: #dcb949; /* or clair et lumineux, lisible sur fonds sombres (AA) */
+  --yvann-gold-text: 220 185 73; /* or clair et lumineux, lisible sur fonds sombres (AA) */
 
   --yvann-glass-bg: rgba(255, 255, 255, 0.06);
   --yvann-glass-border: rgba(201, 162, 39, 0.3);
@@ -75,8 +78,8 @@
     scroll-behavior: smooth;
   }
   body {
-    background-color: var(--yvann-bg);
-    color: var(--yvann-text);
+    background-color: rgb(var(--yvann-bg));
+    color: rgb(var(--yvann-text));
     font-family:
       "Helvetica Now Text",
       -apple-system,
