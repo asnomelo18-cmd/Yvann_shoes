@@ -14,11 +14,6 @@ const PAYMENT_LABELS: Record<PaymentFormValues["method"], string> = {
   especes: "Espèces à la livraison",
 };
 
-const DELIVERY_LABELS: Record<DeliveryFormValues["method"], string> = {
-  standard: "Livraison standard (2 à 5 jours)",
-  express: "Livraison express (24 à 48h)",
-};
-
 export function ConfirmationStep({
   orderNumber,
   address,
@@ -51,7 +46,7 @@ export function ConfirmationStep({
             {address.line2 ? `, ${address.line2}` : ""}, {address.city}, {address.country}
           </p>
           <p className="text-text">
-            <span className="text-text-muted">Mode :</span> {DELIVERY_LABELS[delivery.method]}
+            <span className="text-text-muted">Livraison :</span> {delivery.zoneName}
           </p>
           <p className="text-text">
             <span className="text-text-muted">Paiement :</span> {PAYMENT_LABELS[payment.method]}

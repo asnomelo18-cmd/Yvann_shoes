@@ -1,19 +1,26 @@
+"use client";
+
 import { ContentPage } from "@/components/shared/ContentPage";
+import { useShopSettings } from "@/services/settings";
+import { formatPrice } from "@/lib/utils";
 
 export default function LivraisonPage() {
-  return (
-    <ContentPage title="Livraison" subtitle="Délais, zones et suivi de votre commande.">
-      <h2>Délais de livraison</h2>
-      <ul>
-        <li><strong>Livraison standard</strong> — 2 à 5 jours ouvrés</li>
-        <li><strong>Livraison express</strong> — 24 à 48h</li>
-      </ul>
+  const { data: settings } = useShopSettings();
 
-      <h2>Zones couvertes</h2>
-      <p>
-        Nous livrons actuellement à Abidjan et dans les principales villes de
-        Côte d'Ivoire. Les délais peuvent varier selon la zone de livraison.
-      </p>
+  return (
+    <ContentPage title="Livraison" subtitle="Zones et tarifs de livraison.">
+      <h2>Zones et tarifs</h2>
+      {settings && settings.shippingZones.length > 0 ? (
+        <ul>
+          {settings.shippingZones.map((zone) => (
+            <li key={zone.name}>
+              <strong>{zone.name}</strong> — {formatPrice(zone.price)}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Zones de livraison en cours de mise à jour.</p>
+      )}
 
       <h2>Suivi de commande</h2>
       <p>
@@ -23,12 +30,6 @@ export default function LivraisonPage() {
           Mon compte
         </a>
         .
-      </p>
-
-      <h2>Frais de livraison</h2>
-      <p>
-        Les frais de livraison sont calculés au moment du paiement, selon le
-        mode choisi (standard ou express).
       </p>
     </ContentPage>
   );

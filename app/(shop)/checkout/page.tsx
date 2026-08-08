@@ -17,6 +17,7 @@ import type {
 import { useCartStore } from "@/store/cart-store";
 import { useCreateOrder } from "@/services/orders";
 import { useSession } from "@/services/auth";
+import { useShopSettings } from "@/services/settings";
 
 const STEPS: StepperStep[] = [
   { key: "adresse", label: "Adresse" },
@@ -25,14 +26,13 @@ const STEPS: StepperStep[] = [
   { key: "confirmation", label: "Confirmation" },
 ];
 
-const DELIVERY_PRICE = { standard: 2500, express: 6000 };
-
 export default function CheckoutPage() {
   const router = useRouter();
   const lines = useCartStore((s) => s.lines);
   const subtotal = useCartStore((s) => s.subtotal());
   const clearCart = useCartStore((s) => s.clear);
   const { data: session, isLoading: sessionLoading } = useSession();
+  const { data: settings } = useShopSettings();
   const createOrder = useCreateOrder();
 
   const [stepIndex, setStepIndex] = useState(0);
@@ -42,13 +42,18 @@ export default function CheckoutPage() {
   const [orderNumber, setOrderNumber] = useState<string | null>(null);
   const [snapshotLines] = useState(lines);
 
+  function zonePrice(zoneName: string | undefined) {
+    if (!zoneName || !settings) return 0;
+    return settings.shippingZones.find((z) => z.name === zoneName)?.price ?? 0;
+  }
+
   if (!sessionLoading && !session && stepIndex < 3) {
     return (
       <div className="mx-auto max-w-xl px-4 pb-20 pt-32 text-center">
         <p className="text-text-muted">Connectez-vous pour finaliser votre commande.</p>
         <button
           onClick={() => router.push("/connexion?next=/checkout")}
-          className="mt-4 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white"
+          className="mt-4 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500"
         >
           Se connecter
         </button>
@@ -62,7 +67,7 @@ export default function CheckoutPage() {
         <p className="text-text-muted">Votre panier est vide.</p>
         <button
           onClick={() => router.push("/boutique")}
-          className="mt-4 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-white"
+          className="mt-4 rounded-full bg-yvann-gold-600 px-6 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500"
         >
           Aller à la boutique
         </button>
@@ -76,7 +81,7 @@ export default function CheckoutPage() {
       const result = await createOrder.mutateAsync({
         items: lines.map((l) => ({ variantId: l.variantId, quantity: l.quantity })),
         address,
-        deliveryMethod: delivery.method,
+        zoneName: delivery.zoneName,
         payment: {
           method: values.method.toUpperCase() as any,
           transactionReference: values.transactionReference,
@@ -91,7 +96,7 @@ export default function CheckoutPage() {
     }
   }
 
-  const total = subtotal + (delivery ? DELIVERY_PRICE[delivery.method] : 0);
+  const total = subtotal + zonePrice(delivery?.zoneName);
 
   return (
     <div className="mx-auto max-w-4xl px-4 pb-24 pt-28 sm:px-6 lg:px-8">
@@ -132,7 +137,7 @@ export default function CheckoutPage() {
             {stepIndex === 2 && (
               <PaymentStep
                 defaultValues={payment ?? {}}
-                totalDue={subtotal + (delivery ? DELIVERY_PRICE[delivery.method] : 0)}
+                totalDue={subtotal + zonePrice(delivery?.zoneName)}
                 onNext={handlePaymentSubmit}
                 onBack={() => setStepIndex(1)}
               />

@@ -2,27 +2,10 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IconTruckDelivery, IconBolt } from "@tabler/icons-react";
+import { IconTruckDelivery } from "@tabler/icons-react";
 import { deliverySchema, type DeliveryFormValues } from "@/lib/checkout-schemas";
-import { formatPrice } from "@/lib/utils";
-import { cn } from "@/lib/utils";
-
-const OPTIONS = [
-  {
-    value: "standard" as const,
-    icon: IconTruckDelivery,
-    label: "Livraison standard",
-    detail: "2 à 5 jours ouvrés",
-    price: 2500,
-  },
-  {
-    value: "express" as const,
-    icon: IconBolt,
-    label: "Livraison express",
-    detail: "24 à 48h",
-    price: 6000,
-  },
-];
+import { formatPrice, cn } from "@/lib/utils";
+import { useShopSettings } from "@/services/settings";
 
 export function DeliveryStep({
   defaultValues,
@@ -33,22 +16,29 @@ export function DeliveryStep({
   onNext: (values: DeliveryFormValues) => void;
   onBack: () => void;
 }) {
+  const { data: settings, isLoading } = useShopSettings();
+  const zones = settings?.shippingZones ?? [];
+
   const { handleSubmit, watch, setValue } = useForm<DeliveryFormValues>({
     resolver: zodResolver(deliverySchema),
-    defaultValues: { method: defaultValues.method ?? "standard" },
+    defaultValues: { zoneName: defaultValues.zoneName ?? "" },
   });
 
-  const selected = watch("method");
+  const selected = watch("zoneName");
+
+  if (isLoading) {
+    return <p className="text-text-muted">Chargement des zones de livraison...</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit(onNext)} className="max-w-xl">
       <div className="space-y-3">
-        {OPTIONS.map((opt) => (
+        {zones.map((zone) => (
           <label
-            key={opt.value}
+            key={zone.name}
             className={cn(
               "flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition-colors",
-              selected === opt.value
+              selected === zone.name
                 ? "border-yvann-gold-600 bg-yvann-gold-500/5"
                 : "border-slate-200 dark:border-slate-800"
             )}
@@ -56,17 +46,21 @@ export function DeliveryStep({
             <input
               type="radio"
               className="sr-only"
-              checked={selected === opt.value}
-              onChange={() => setValue("method", opt.value)}
+              checked={selected === zone.name}
+              onChange={() => setValue("zoneName", zone.name)}
             />
-            <opt.icon size={22} className="text-yvann-gold-600" />
+            <IconTruckDelivery size={22} className="text-yvann-gold-600" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-text">{opt.label}</p>
-              <p className="text-xs text-text-muted">{opt.detail}</p>
+              <p className="text-sm font-medium text-text">{zone.name}</p>
             </div>
-            <span className="text-sm font-semibold text-text">{formatPrice(opt.price)}</span>
+            <span className="text-sm font-semibold text-text">{formatPrice(zone.price)}</span>
           </label>
         ))}
+        {zones.length === 0 && (
+          <p className="text-sm text-text-muted">
+            Aucune zone de livraison configurée pour l'instant.
+          </p>
+        )}
       </div>
 
       <div className="mt-8 flex gap-3">
@@ -79,7 +73,8 @@ export function DeliveryStep({
         </button>
         <button
           type="submit"
-          className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
+          disabled={!selected}
+          className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500 disabled:opacity-60"
         >
           Continuer vers le paiement
         </button>

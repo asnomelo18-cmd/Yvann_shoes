@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { IconMail, IconPhone, IconMapPin } from "@tabler/icons-react";
+import { useShopSettings } from "@/services/settings";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const { data: settings } = useShopSettings();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,12 +23,16 @@ export default function ContactPage() {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <div className="space-y-4">
-          <div className="flex items-center gap-3 text-sm text-text">
-            <IconMail size={18} className="text-yvann-gold-600" /> contact@yvann-boutique.com
-          </div>
-          <div className="flex items-center gap-3 text-sm text-text">
-            <IconPhone size={18} className="text-yvann-gold-600" /> +225 07 00 00 00 00
-          </div>
+          {settings?.email && (
+            <div className="flex items-center gap-3 text-sm text-text">
+              <IconMail size={18} className="text-yvann-gold-600" /> {settings.email}
+            </div>
+          )}
+          {settings?.phone && (
+            <div className="flex items-center gap-3 text-sm text-text">
+              <IconPhone size={18} className="text-yvann-gold-600" /> {settings.phone}
+            </div>
+          )}
           <div className="flex items-center gap-3 text-sm text-text">
             <IconMapPin size={18} className="text-yvann-gold-600" /> Abidjan, Côte d'Ivoire
           </div>

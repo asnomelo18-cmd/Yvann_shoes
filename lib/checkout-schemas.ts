@@ -13,7 +13,7 @@ export const addressSchema = z.object({
 export type AddressFormValues = z.infer<typeof addressSchema>;
 
 export const deliverySchema = z.object({
-  method: z.enum(["standard", "express"]),
+  zoneName: z.string().min(1, "Choisissez une zone de livraison"),
 });
 export type DeliveryFormValues = z.infer<typeof deliverySchema>;
 

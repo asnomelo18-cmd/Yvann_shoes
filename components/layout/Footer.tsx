@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   IconBrandInstagram,
@@ -5,6 +7,7 @@ import {
   IconBrandFacebook,
   IconBrandX,
 } from "@tabler/icons-react";
+import { useShopSettings } from "@/services/settings";
 
 const COLUMNS = [
   {
@@ -39,14 +42,16 @@ const COLUMNS = [
   },
 ];
 
-const SOCIALS = [
-  { icon: IconBrandInstagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: IconBrandTiktok, href: "https://tiktok.com", label: "TikTok" },
-  { icon: IconBrandFacebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: IconBrandX, href: "https://x.com", label: "X" },
-];
-
 export function Footer() {
+  const { data: settings } = useShopSettings();
+
+  const SOCIALS = [
+    { icon: IconBrandInstagram, href: settings?.social.instagram, label: "Instagram" },
+    { icon: IconBrandTiktok, href: settings?.social.tiktok, label: "TikTok" },
+    { icon: IconBrandFacebook, href: settings?.social.facebook, label: "Facebook" },
+    { icon: IconBrandX, href: settings?.social.x, label: "X" },
+  ].filter((s): s is typeof s & { href: string } => !!s.href);
+
   return (
     <footer className="border-t border-slate-200 bg-surface dark:border-slate-800">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-16 sm:px-8 lg:grid-cols-5 lg:px-12">
@@ -60,20 +65,22 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-sm text-text-muted">
             La mode à vos pieds — sneakers, running et chaussures de ville.
           </p>
-          <div className="mt-5 flex gap-3">
-            {SOCIALS.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-slate-300 p-2 text-text-muted transition-colors hover:border-yvann-gold-500 hover:text-yvann-gold-600 dark:border-slate-700"
-              >
-                <Icon size={18} />
-              </a>
-            ))}
-          </div>
+          {SOCIALS.length > 0 && (
+            <div className="mt-5 flex gap-3">
+              {SOCIALS.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-slate-300 p-2 text-text-muted transition-colors hover:border-yvann-gold-500 hover:text-yvann-gold-600 dark:border-slate-700"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
         {COLUMNS.map((col) => (

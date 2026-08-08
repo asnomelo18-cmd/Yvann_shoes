@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import type { AddressFormValues, DeliveryFormValues, PaymentFormValues } from "@/lib/checkout-schemas";
+import type { AddressFormValues, PaymentFormValues } from "@/lib/checkout-schemas";
 
 export interface CreateOrderPayload {
   items: { variantId: string; quantity: number }[];
   address: AddressFormValues;
-  deliveryMethod: DeliveryFormValues["method"];
+  zoneName: string;
   payment: {
     method: Uppercase<PaymentFormValues["method"]>;
     transactionReference?: string;

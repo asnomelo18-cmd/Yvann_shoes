@@ -1,63 +1,22 @@
 "use client";
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconWallet, IconBuildingBank, IconCash, IconCopy } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { paymentSchema, type PaymentFormValues } from "@/lib/checkout-schemas";
-import { formatPrice } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatPrice, cn } from "@/lib/utils";
+import { useShopSettings } from "@/services/settings";
 
 interface MethodConfig {
   value: PaymentFormValues["method"];
   label: string;
   icon: typeof IconWallet;
   instructions: string;
-  payTo?: string; // numéro / IBAN à afficher et copier
+  payTo: string; // numéro / IBAN — méthode masquée si vide
   requiresReference: boolean;
 }
-
-const METHODS: MethodConfig[] = [
-  {
-    value: "orange_money",
-    label: "Orange Money",
-    icon: IconWallet,
-    instructions: "Envoyez le montant total au numéro ci-dessous, puis indiquez la référence reçue par SMS.",
-    payTo: "07 00 00 00 00",
-    requiresReference: true,
-  },
-  {
-    value: "mtn_money",
-    label: "MTN Money",
-    icon: IconWallet,
-    instructions: "Envoyez le montant total au numéro ci-dessous, puis indiquez la référence reçue par SMS.",
-    payTo: "05 00 00 00 00",
-    requiresReference: true,
-  },
-  {
-    value: "wave",
-    label: "Wave",
-    icon: IconWallet,
-    instructions: "Envoyez le montant total au numéro ci-dessous, puis indiquez la référence de la transaction.",
-    payTo: "01 00 00 00 00",
-    requiresReference: true,
-  },
-  {
-    value: "virement",
-    label: "Virement bancaire",
-    icon: IconBuildingBank,
-    instructions: "Effectuez un virement vers les coordonnées ci-dessous, puis indiquez la référence du virement.",
-    payTo: "CI93 CI001 00001 0000000000000 00",
-    requiresReference: true,
-  },
-  {
-    value: "especes",
-    label: "Espèces à la livraison",
-    icon: IconCash,
-    instructions: "Réglez en espèces directement au livreur à la réception de votre commande.",
-    requiresReference: false,
-  },
-];
 
 export function PaymentStep({
   defaultValues,
@@ -70,6 +29,55 @@ export function PaymentStep({
   onNext: (values: PaymentFormValues) => void;
   onBack: () => void;
 }) {
+  const { data: settings, isLoading: settingsLoading } = useShopSettings();
+
+  const ALL_METHODS: MethodConfig[] = [
+    {
+      value: "orange_money",
+      label: "Orange Money",
+      icon: IconWallet,
+      instructions: "Envoyez le montant total au numéro ci-dessous, puis indiquez la référence reçue par SMS.",
+      payTo: settings?.payment.orangeMoney ?? "",
+      requiresReference: true,
+    },
+    {
+      value: "mtn_money",
+      label: "MTN Money",
+      icon: IconWallet,
+      instructions: "Envoyez le montant total au numéro ci-dessous, puis indiquez la référence reçue par SMS.",
+      payTo: settings?.payment.mtnMoney ?? "",
+      requiresReference: true,
+    },
+    {
+      value: "wave",
+      label: "Wave",
+      icon: IconWallet,
+      instructions: "Envoyez le montant total au numéro ci-dessous, puis indiquez la référence de la transaction.",
+      payTo: settings?.payment.wave ?? "",
+      requiresReference: true,
+    },
+    {
+      value: "virement",
+      label: "Virement bancaire",
+      icon: IconBuildingBank,
+      instructions: "Effectuez un virement vers les coordonnées ci-dessous, puis indiquez la référence du virement.",
+      payTo: settings?.payment.bankAccount ?? "",
+      requiresReference: true,
+    },
+    {
+      value: "especes",
+      label: "Espèces à la livraison",
+      icon: IconCash,
+      instructions: "Réglez en espèces directement au livreur à la réception de votre commande.",
+      payTo: "",
+      requiresReference: false,
+    },
+  ];
+
+  // Un moyen de paiement n'est proposé que si un vrai numéro a été configuré
+  // dans /admin/parametres (ou pour les espèces, qui n'en ont pas besoin).
+  const METHODS = ALL_METHODS.filter((m) => m.value === "especes" || m.payTo);
+
   const {
     register,
     handleSubmit,
@@ -78,16 +86,37 @@ export function PaymentStep({
     formState: { errors },
   } = useForm<PaymentFormValues>({
     resolver: zodResolver(paymentSchema),
-    defaultValues: { method: defaultValues.method ?? "orange_money", transactionReference: "" },
+    defaultValues: { method: defaultValues.method ?? "especes", transactionReference: "" },
   });
 
   const selected = watch("method");
-  const activeMethod = METHODS.find((m) => m.value === selected)!;
+
+  useEffect(() => {
+    if (!settingsLoading && !METHODS.some((m) => m.value === selected)) {
+      setValue("method", METHODS[0]?.value ?? "especes");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settingsLoading]);
+
+  const activeMethod = METHODS.find((m) => m.value === selected) ?? METHODS[0];
 
   function copyPayTo() {
-    if (!activeMethod.payTo) return;
+    if (!activeMethod?.payTo) return;
     navigator.clipboard.writeText(activeMethod.payTo);
     toast.success("Copié.");
+  }
+
+  if (settingsLoading) {
+    return <p className="text-text-muted">Chargement des moyens de paiement...</p>;
+  }
+
+  if (!activeMethod) {
+    return (
+      <p className="max-w-xl text-sm text-text-muted">
+        Aucun moyen de paiement n'est configuré pour l'instant. Contactez-nous directement pour
+        finaliser votre commande.
+      </p>
+    );
   }
 
   return (
@@ -167,7 +196,7 @@ export function PaymentStep({
         </button>
         <button
           type="submit"
-          className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-white hover:bg-yvann-gold-700"
+          className="rounded-full bg-yvann-gold-600 px-8 py-3 text-sm font-semibold text-yvann-black-950 hover:bg-yvann-gold-500"
         >
           Valider ma commande
         </button>

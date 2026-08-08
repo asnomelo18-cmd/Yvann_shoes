@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/session";
+import { getShopSettings } from "@/lib/settings";
 
 const createOrderSchema = z.object({
   items: z
@@ -22,14 +23,12 @@ const createOrderSchema = z.object({
     postalCode: z.string().optional(),
     country: z.string().min(2),
   }),
-  deliveryMethod: z.enum(["standard", "express"]),
+  zoneName: z.string().min(1),
   payment: z.object({
     method: z.enum(["ORANGE_MONEY", "MTN_MONEY", "WAVE", "VIREMENT", "ESPECES"]),
     transactionReference: z.string().optional(),
   }),
 });
-
-const SHIPPING_PRICE = { standard: 2500, express: 6000 };
 
 export async function POST(request: Request) {
   try {
@@ -44,7 +43,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Formulaire de commande invalide." }, { status: 400 });
     }
 
-  const { items, address, deliveryMethod, payment } = parsed.data;
+  const { items, address, zoneName, payment } = parsed.data;
+
+  // Le prix de livraison vient toujours des réglages serveur (/admin/parametres),
+  // jamais d'une valeur envoyée par le client — évite qu'un prix soit falsifié.
+  const settings = await getShopSettings();
+  const zone = settings.shippingZones.find((z) => z.name === zoneName);
+  if (!zone) {
+    return NextResponse.json({ error: "Zone de livraison invalide." }, { status: 400 });
+  }
+  const shippingCost = zone.price;
 
   const order = await prisma.$transaction(async (tx) => {
       // Vérifie et décrémente le stock de chaque variante commandée
@@ -90,7 +98,6 @@ export async function POST(request: Request) {
         return sum + unitPrice * item.quantity;
       }, 0);
 
-      const shippingCost = SHIPPING_PRICE[deliveryMethod];
       const total = computedSubtotal + shippingCost;
 
       const createdOrder = await tx.order.create({
