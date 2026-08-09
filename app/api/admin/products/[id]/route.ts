@@ -40,6 +40,7 @@ const updateProductSchema = z.object({
       })
     )
     .min(1),
+  images: z.array(z.string().url()).min(1),
 });
 
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
@@ -72,6 +73,13 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     await tx.productCategory.deleteMany({ where: { productId: params.id } });
     await tx.productCategory.createMany({
       data: data.categoryIds.map((categoryId) => ({ productId: params.id, categoryId })),
+    });
+
+    // Réaligne les photos (ordre respecté) — les fichiers restent sur Vercel
+    // Blob, seuls les pointeurs en base sont recréés.
+    await tx.productImage.deleteMany({ where: { productId: params.id } });
+    await tx.productImage.createMany({
+      data: data.images.map((url, i) => ({ productId: params.id, url, position: i })),
     });
 
     // Upsert des variantes (pointure × coloris) — le stock est mis à jour, pas recréé

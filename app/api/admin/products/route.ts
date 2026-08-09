@@ -21,6 +21,7 @@ const createProductSchema = z.object({
       })
     )
     .min(1),
+  images: z.array(z.string().url()).min(1),
 });
 
 function slugify(name: string) {
@@ -72,10 +73,7 @@ export async function POST(request: Request) {
         isPublished: true,
         categories: { create: data.categoryIds.map((categoryId) => ({ categoryId })) },
         images: {
-          create: [
-            { url: `https://picsum.photos/seed/${slug}-1/800/800`, angle: "Face", position: 0 },
-            { url: `https://picsum.photos/seed/${slug}-2/800/800`, angle: "Profil", position: 1 },
-          ],
+          create: data.images.map((url, i) => ({ url, position: i })),
         },
       },
     });

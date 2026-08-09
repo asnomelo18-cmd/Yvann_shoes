@@ -8,6 +8,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { IconTrash } from "@tabler/icons-react";
 import { GlassTags } from "@/components/shared/GlassTag";
+import { ProductImageUploader } from "@/components/admin/ProductImageUploader";
 import { VariantStockGrid, variantKey, type VariantStockMap } from "@/components/admin/VariantStockGrid";
 import { ALL_SIZES, ALL_COLORS } from "@/lib/mock-products";
 import {
@@ -57,6 +58,7 @@ interface ExistingProduct {
   compareAtPrice: number | null;
   categories: { categoryId: string }[];
   variants: { size: { eu: number }; color: { name: string }; stock: number }[];
+  images: string[];
 }
 
 export function ProductForm({ initialProduct }: { initialProduct?: ExistingProduct }) {
@@ -92,6 +94,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>(
     initialProduct?.categories.map((c) => c.categoryId) ?? []
   );
+  const [images, setImages] = useState<string[]>(initialProduct?.images ?? []);
   const [selectedColors, setSelectedColors] = useState<string[]>(
     initialProduct ? [...new Set(initialProduct.variants.map((v) => v.color.name))] : []
   );
@@ -121,6 +124,10 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
       toast.error("Choisissez au moins une pointure et un coloris.");
       return;
     }
+    if (images.length === 0) {
+      toast.error("Ajoutez au moins une photo du produit.");
+      return;
+    }
 
     const variants = selectedSizes.flatMap((sizeStr) =>
       selectedColors.map((colorName) => ({
@@ -140,6 +147,7 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
       basePrice: values.basePrice,
       compareAtPrice: values.compareAtPrice || null,
       variants,
+      images,
     };
 
     const mutation = isEditing ? updateProduct : createProduct;
@@ -271,6 +279,11 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
             />
           </div>
         </div>
+      </section>
+
+      <section>
+        <h3 className="mb-4 text-sm font-semibold text-text">Photos</h3>
+        <ProductImageUploader images={images} onChange={setImages} />
       </section>
 
       <section>

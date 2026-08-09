@@ -67,11 +67,29 @@ que mon environnement** — en local ou sur Vercel/Render (accès réseau
 complet), ces commandes fonctionnent normalement. Le code des routes API n'a
 donc pas pu tourner en conditions réelles ici ; à valider en premier chez toi.
 
+## Photos produit (Vercel Blob)
+
+Le formulaire produit admin (`/admin/produits/nouveau` et `/admin/produits/[id]`)
+permet d'uploader de vraies photos, stockées sur **Vercel Blob**.
+
+**Pour l'activer** :
+1. Sur le dashboard Vercel → ton projet → onglet **Storage** → **Create Database** → **Blob**
+2. Une fois créé, Vercel ajoute automatiquement la variable d'environnement
+   `BLOB_READ_WRITE_TOKEN` à ton projet — pas besoin de la copier à la main
+3. Redéploie (ou le prochain push la prendra en compte)
+
+En local, récupère la variable avec `vercel env pull .env.local` (après
+`vercel link` sur le projet), ou colle-la à la main dans `.env` depuis
+Storage → ton store → onglet `.env.local`.
+
+Sans cette variable configurée, l'upload de photos échouera avec une erreur
+explicite plutôt que de planter silencieusement.
+
 ## Démarrage local
 
 ```bash
 npm install
-cp .env.example .env   # renseigner DATABASE_URL et les secrets JWT
+cp .env.example .env   # renseigner DATABASE_URL, secrets JWT, BLOB_READ_WRITE_TOKEN
 npx prisma generate --schema=database/schema.prisma
 npx prisma migrate dev --schema=database/schema.prisma --name init
 npm run prisma:seed
@@ -80,17 +98,14 @@ npm run dev
 
 ## Prochaines étapes
 
-1. Vérifier que `prisma migrate dev` passe bien chez toi (premier test réel
-   du schéma dans un environnement avec accès réseau complet).
-2. Brancher `/admin/produits` (liste + formulaire) sur
-   `GET/POST /api/admin/products` — actuellement encore sur
-   `lib/mock-products.ts`.
-3. Espace Compte client (`/compte`) : profil, adresses, historique de
-   commandes, wishlist — les routes API n'existent pas encore.
-4. Pages institutionnelles (CGV, FAQ, contact...) — non bloquant pour un
-   premier lancement.
-5. OAuth (Google/Facebook/GitHub/Apple), OTP, 2FA — stubs présents dans
+1. Espace Compte client : compléter Profil éditable, Adresses (actuellement
+   juste l'historique de commandes est fonctionnel).
+2. OAuth (Google/Facebook/GitHub/Apple), OTP, 2FA — stubs présents dans
    `lib/auth.ts`, non implémentés.
+3. Recherche produit, suivi de commande avec timeline visuelle, programme de
+   fidélité/parrainage.
+4. Vue 360° 3D de la fiche produit (React Three Fiber, prévu dans la stack
+   mais pas encore implémenté).
 
 ## Points d'attention
 

@@ -17,6 +17,7 @@ export interface AdminProductInput {
   basePrice: number;
   compareAtPrice?: number | null;
   variants: AdminProductVariant[];
+  images: string[];
 }
 
 export function useAdminMeta() {

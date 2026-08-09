@@ -28,6 +28,7 @@ export default function EditProduitPage() {
           compareAtPrice: product.compareAtPrice ? Number(product.compareAtPrice) : null,
           categories: product.categories,
           variants: product.variants,
+          images: product.images?.map((img: { url: string }) => img.url) ?? [],
         }}
       />
     </div>
