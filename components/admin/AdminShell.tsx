@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminTopbar } from "@/components/admin/AdminTopbar";
+import { AdminAccessGuard } from "@/components/admin/AdminAccessGuard";
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -19,7 +20,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       <AdminSidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
       <div className="min-w-0 flex-1">
         <AdminTopbar onMenuClick={() => setMobileOpen(true)} />
-        <main className="p-4 sm:p-6">{children}</main>
+        <main className="p-4 sm:p-6">
+          <AdminAccessGuard>{children}</AdminAccessGuard>
+        </main>
       </div>
     </div>
   );

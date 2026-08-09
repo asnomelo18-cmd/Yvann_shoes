@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/session";
+import { requireSection } from "@/lib/session";
 
 export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin();
+  const admin = await requireSection("categories");
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const productCount = await prisma.product.count({ where: { brandId: params.id } });

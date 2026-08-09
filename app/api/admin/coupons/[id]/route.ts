@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/session";
+import { requireSection } from "@/lib/session";
 
 const patchSchema = z.object({ isActive: z.boolean() });
 
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin();
+  const admin = await requireSection("promotions");
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const body = await request.json();
@@ -21,7 +21,7 @@ export async function PATCH(request: Request, { params }: { params: { id: string
 }
 
 export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin();
+  const admin = await requireSection("promotions");
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   await prisma.coupon.delete({ where: { id: params.id } });

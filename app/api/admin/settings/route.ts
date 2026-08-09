@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { requireAdmin } from "@/lib/session";
+import { requireSuperAdmin } from "@/lib/session";
 import { getShopSettings, saveShopSettings } from "@/lib/settings";
 
 export async function GET() {
-  const admin = await requireAdmin();
+  const admin = await requireSuperAdmin();
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const settings = await getShopSettings();
@@ -32,7 +32,7 @@ const settingsSchema = z.object({
 });
 
 export async function PUT(request: Request) {
-  const admin = await requireAdmin();
+  const admin = await requireSuperAdmin();
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const body = await request.json();

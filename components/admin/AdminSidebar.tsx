@@ -16,24 +16,36 @@ import {
   IconBell,
   IconSettings,
   IconChartBar,
+  IconShieldLock,
   IconX,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
+import { useSession } from "@/services/auth";
+import { useMyPermissions, canAccessSection } from "@/services/permissions";
+import type { SectionKey } from "@/lib/permissions";
 
-const SECTIONS = [
-  { label: "Vue d'ensemble", href: "/admin", icon: IconLayoutDashboard },
-  { label: "Produits", href: "/admin/produits", icon: IconShoe },
-  { label: "Catégories & marques", href: "/admin/categories", icon: IconTags },
-  { label: "Commandes", href: "/admin/commandes", icon: IconPackage },
-  { label: "Clients", href: "/admin/clients", icon: IconUsers },
-  { label: "Utilisateurs internes", href: "/admin/utilisateurs", icon: IconUserShield },
-  { label: "Paiements", href: "/admin/paiements", icon: IconWallet },
-  { label: "Promotions", href: "/admin/promotions", icon: IconDiscount2 },
-  { label: "Contenu", href: "/admin/contenu", icon: IconPhoto },
-  { label: "Avis", href: "/admin/avis", icon: IconStar },
-  { label: "Notifications", href: "/admin/notifications", icon: IconBell },
-  { label: "Statistiques", href: "/admin/statistiques", icon: IconChartBar },
-  { label: "Paramètres", href: "/admin/parametres", icon: IconSettings },
+interface SidebarSection {
+  label: string;
+  href: string;
+  icon: typeof IconLayoutDashboard;
+  section: SectionKey | "overview" | "always-admin-only";
+}
+
+const SECTIONS: SidebarSection[] = [
+  { label: "Vue d'ensemble", href: "/admin", icon: IconLayoutDashboard, section: "overview" },
+  { label: "Produits", href: "/admin/produits", icon: IconShoe, section: "produits" },
+  { label: "Catégories & marques", href: "/admin/categories", icon: IconTags, section: "categories" },
+  { label: "Commandes", href: "/admin/commandes", icon: IconPackage, section: "commandes" },
+  { label: "Clients", href: "/admin/clients", icon: IconUsers, section: "clients" },
+  { label: "Paiements", href: "/admin/paiements", icon: IconWallet, section: "paiements" },
+  { label: "Promotions", href: "/admin/promotions", icon: IconDiscount2, section: "promotions" },
+  { label: "Contenu", href: "/admin/contenu", icon: IconPhoto, section: "contenu" },
+  { label: "Avis", href: "/admin/avis", icon: IconStar, section: "avis" },
+  { label: "Notifications", href: "/admin/notifications", icon: IconBell, section: "notifications" },
+  { label: "Statistiques", href: "/admin/statistiques", icon: IconChartBar, section: "statistiques" },
+  { label: "Utilisateurs internes", href: "/admin/utilisateurs", icon: IconUserShield, section: "always-admin-only" },
+  { label: "Permissions", href: "/admin/permissions", icon: IconShieldLock, section: "always-admin-only" },
+  { label: "Paramètres", href: "/admin/parametres", icon: IconSettings, section: "always-admin-only" },
 ];
 
 function SidebarContent({
@@ -44,6 +56,14 @@ function SidebarContent({
   onClose?: () => void;
 }) {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const { data: permData } = useMyPermissions();
+
+  const visibleSections = SECTIONS.filter((s) => {
+    if (s.section === "overview") return true;
+    if (s.section === "always-admin-only") return session?.role === "ADMIN";
+    return canAccessSection(session?.role, s.section, permData?.permissions);
+  });
 
   return (
     <>
@@ -65,7 +85,7 @@ function SidebarContent({
       </div>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 py-4">
-        {SECTIONS.map((section) => {
+        {visibleSections.map((section) => {
           const isActive = pathname === section.href;
           return (
             <Link

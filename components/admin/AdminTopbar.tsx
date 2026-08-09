@@ -17,6 +17,7 @@ const TITLES: Record<string, string> = {
   "/admin/notifications": "Notifications",
   "/admin/statistiques": "Statistiques",
   "/admin/parametres": "Paramètres",
+  "/admin/permissions": "Permissions",
 };
 
 export function AdminTopbar({ onMenuClick }: { onMenuClick?: () => void }) {

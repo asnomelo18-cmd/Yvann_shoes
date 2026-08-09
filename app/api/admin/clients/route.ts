@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/session";
+import { requireSection } from "@/lib/session";
 
 export async function GET() {
-  const admin = await requireAdmin();
+  const admin = await requireSection("clients");
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const clients = await prisma.user.findMany({

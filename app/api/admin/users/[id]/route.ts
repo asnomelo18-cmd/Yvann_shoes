@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/session";
+import { requireSuperAdmin } from "@/lib/session";
 
 const patchSchema = z.object({
   role: z.enum(["ADMIN", "MANAGER", "SUPPORT", "VENDEUR", "CLIENT"]),
 });
 
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin();
+  const admin = await requireSuperAdmin();
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   if (admin.id === params.id) {

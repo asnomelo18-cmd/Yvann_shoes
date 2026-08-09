@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/session";
+import { requireSection } from "@/lib/session";
 
 const createProductSchema = z.object({
   name: z.string().min(2),
@@ -35,7 +35,7 @@ function slugify(name: string) {
 }
 
 export async function GET() {
-  const admin = await requireAdmin();
+  const admin = await requireSection("produits");
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const products = await prisma.product.findMany({
@@ -46,7 +46,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const admin = await requireAdmin();
+  const admin = await requireSection("produits");
   if (!admin) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
 
   const body = await request.json();
