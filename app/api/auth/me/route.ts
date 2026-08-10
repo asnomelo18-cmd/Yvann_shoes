@@ -11,8 +11,10 @@ export async function GET() {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
+      phone: user.phone,
       role: user.role,
       usualSize: user.usualSize,
+      favoriteStyle: user.favoriteStyle,
       loyaltyPoints: user.loyaltyPoints,
     },
   });

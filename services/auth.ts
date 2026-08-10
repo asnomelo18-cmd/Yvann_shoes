@@ -5,8 +5,10 @@ export interface SessionUser {
   email: string;
   firstName: string | null;
   lastName: string | null;
+  phone?: string | null;
   role: string;
   usualSize?: number | null;
+  favoriteStyle?: string | null;
   loyaltyPoints?: number;
 }
 

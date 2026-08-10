@@ -75,8 +75,8 @@ export default function ComptePage() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { icon: IconUserCircle, label: "Profil", desc: "Infos personnelles", href: null },
-          { icon: IconMapPin, label: "Adresses", desc: "Livraison & facturation", href: null },
+          { icon: IconUserCircle, label: "Profil", desc: "Infos personnelles", href: "/compte/profil" },
+          { icon: IconMapPin, label: "Adresses", desc: "Livraison & facturation", href: "/compte/adresses" },
           { icon: IconHeart, label: "Favoris", desc: "Vos coups de cœur", href: "/favoris" },
           { icon: IconBell, label: "Notifications", desc: "Suivi & promos", href: null },
         ].map((item) =>
