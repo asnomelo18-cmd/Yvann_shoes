@@ -3,9 +3,9 @@ import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { requireSection } from "@/lib/session";
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const body = (await request.json()) as HandleUploadBody;
-
   try {
+    const body = (await request.json()) as HandleUploadBody;
+
     const jsonResponse = await handleUpload({
       body,
       request,
@@ -31,6 +31,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
+    console.error("Erreur /api/admin/upload :", error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Upload impossible." },
       { status: 400 }
