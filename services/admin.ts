@@ -22,7 +22,7 @@ export interface ApiAdminOrderSummary {
   createdAt: string;
 }
 
-export function useAdminPayments(status?: string) {
+export function useAdminPayments(status?: string, enabled: boolean = true) {
   return useQuery({
     queryKey: ["admin", "payments", status],
     queryFn: async () => {
@@ -31,6 +31,7 @@ export function useAdminPayments(status?: string) {
       const data = await res.json();
       return data.payments as ApiAdminPayment[];
     },
+    enabled,
   });
 }
 

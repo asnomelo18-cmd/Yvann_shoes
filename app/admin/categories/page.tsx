@@ -73,7 +73,11 @@ function EntityManager({ entity, label }: { entity: "brands" | "categories"; lab
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (name.trim()) create.mutate(name.trim());
+          if (!name.trim()) {
+            toast.error("Indique un nom avant d'ajouter.");
+            return;
+          }
+          create.mutate(name.trim());
         }}
         className="flex gap-2"
       >

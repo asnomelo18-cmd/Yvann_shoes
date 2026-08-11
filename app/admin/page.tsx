@@ -1,27 +1,75 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { IconCash, IconPackage, IconUserPlus, IconTrendingUp, IconClockHour4 } from "@tabler/icons-react";
-import { StatCard } from "@/components/cards/StatCard";
+import { IconCash, IconPackage, IconUserPlus, IconAlertTriangle, IconClockHour4 } from "@tabler/icons-react";
+import { StatCard, StatCardSkeleton } from "@/components/cards/StatCard";
 import { useAdminPayments } from "@/services/admin";
+import { useSession } from "@/services/auth";
+import { useMyPermissions, canAccessSection } from "@/services/permissions";
 import { formatPrice } from "@/lib/utils";
 
-// TODO : les 4 StatCards du haut restent à agréger réellement (services/admin-stats.ts,
-// endpoint /api/admin/stats) — chiffre d'affaires, commandes du jour, nouveaux clients, conversion.
+interface OverviewStats {
+  revenueThisMonth: number;
+  ordersToday: number;
+  newCustomersThisMonth: number;
+  lowStockVariants: number;
+}
+
 export default function AdminOverviewPage() {
-  const { data: pendingPayments } = useAdminPayments("EN_ATTENTE");
-  const pending = pendingPayments ?? [];
+  const { data: session } = useSession();
+  const { data: permData } = useMyPermissions();
+  const canSeePayments = canAccessSection(session?.role, "paiements", permData?.permissions);
+
+  const { data: stats, isLoading: statsLoading } = useQuery({
+    queryKey: ["admin", "overview-stats"],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/overview-stats");
+      if (!res.ok) throw new Error("Chargement impossible.");
+      return res.json() as Promise<OverviewStats>;
+    },
+  });
+
+  // Le bandeau paiements en attente n'est chargé que si le rôle y a accès —
+  // évite de spammer des 403 pour les rôles qui n'ont pas cette permission.
+  const { data: pendingPayments } = useAdminPayments("EN_ATTENTE", canSeePayments);
+  const pending = canSeePayments ? pendingPayments ?? [] : [];
 
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Chiffre d'affaires (mois)" value={formatPrice(1284000)} icon={IconCash} />
-        <StatCard label="Commandes du jour" value="14" icon={IconPackage} />
-        <StatCard label="Nouveaux clients" value="8" icon={IconUserPlus} tone="success" />
-        <StatCard label="Taux de conversion" value="3,2 %" icon={IconTrendingUp} />
+        {statsLoading || !stats ? (
+          <>
+            <StatCardSkeleton />
+            <StatCardSkeleton />
+            <StatCardSkeleton />
+            <StatCardSkeleton />
+          </>
+        ) : (
+          <>
+            <StatCard
+              label="Chiffre d'affaires (mois)"
+              value={formatPrice(Number(stats.revenueThisMonth))}
+              icon={IconCash}
+            />
+            <StatCard label="Commandes du jour" value={String(stats.ordersToday)} icon={IconPackage} />
+            <StatCard
+              label="Nouveaux clients (mois)"
+              value={String(stats.newCustomersThisMonth)}
+              icon={IconUserPlus}
+              tone="success"
+            />
+            <StatCard
+              label="Variantes en rupture (≤3)"
+              value={String(stats.lowStockVariants)}
+              icon={IconAlertTriangle}
+              tone={stats.lowStockVariants > 0 ? "danger" : "default"}
+            />
+          </>
+        )}
       </div>
 
-      {pending.length > 0 && (
+      {canSeePayments && pending.length > 0 && (
         <div className="mt-8 rounded-2xl border border-yvann-warning/30 bg-yvann-warning/5 p-5">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
