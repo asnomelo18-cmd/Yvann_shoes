@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,7 +22,6 @@ import {
 const productSchema = z.object({
   name: z.string().min(2, "Nom requis"),
   brandId: z.string().min(1, "Marque requise"),
-  categoryIds: z.array(z.string()).min(1, "Choisissez au moins une catégorie"),
   gender: z.enum(["HOMME", "FEMME", "ENFANT", "UNISEXE"]),
   usage: z.enum(["RUNNING", "STREETWEAR", "TRAINING", "VILLE", "SPORT"]),
   description: z.string().min(10, "Description trop courte"),
@@ -73,7 +72,6 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
@@ -81,7 +79,6 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
       ? {
           name: initialProduct.name,
           brandId: initialProduct.brandId,
-          categoryIds: initialProduct.categories.map((c) => c.categoryId),
           gender: initialProduct.gender as ProductFormValues["gender"],
           usage: (initialProduct.usage ?? "STREETWEAR") as ProductFormValues["usage"],
           description: initialProduct.description,
@@ -109,11 +106,6 @@ export function ProductForm({ initialProduct }: { initialProduct?: ExistingProdu
     }
     return map;
   });
-
-  // Garde le champ caché categoryIds du resolver synchronisé avec les tags sélectionnés
-  useEffect(() => {
-    reset((current) => ({ ...current, categoryIds: selectedCategoryIds } as ProductFormValues));
-  }, [selectedCategoryIds, reset]);
 
   function onSubmit(values: ProductFormValues) {
     if (selectedCategoryIds.length === 0) {
