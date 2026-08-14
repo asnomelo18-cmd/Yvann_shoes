@@ -39,7 +39,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
           discountAmount: Number(order.discountAmount),
           total: Number(order.total),
           currency: order.currency,
-          items: order.items.map((item) => ({
+          items: order.items.map((item: (typeof order.items)[number]) => ({
             name: item.product.name,
             size: item.variant.size.eu,
             color: item.variant.color.name,
@@ -66,7 +66,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
       })
     );
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `inline; filename="facture-${order.orderNumber}.pdf"`,
