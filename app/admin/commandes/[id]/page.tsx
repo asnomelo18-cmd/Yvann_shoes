@@ -49,9 +49,14 @@ export default function AdminOrderDetailPage() {
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-2xl font-semibold text-text">{order.orderNumber}</h2>
         <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-sm text-text dark:border-slate-700">
+          <a
+            href={`/api/orders/${params.id}/invoice`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-sm text-text dark:border-slate-700"
+          >
             <IconFileInvoice size={16} /> Facture PDF
-          </button>
+          </a>
           <button
             onClick={() => updateOrderStatus("EXPEDIEE")}
             className="flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-2 text-sm text-text dark:border-slate-700"

@@ -2,6 +2,17 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSection } from "@/lib/session";
+import { createNotification } from "@/lib/notify";
+
+const STATUS_LABELS: Record<string, string> = {
+  EN_ATTENTE: "en attente",
+  PAYEE: "payée",
+  PREPARATION: "en préparation",
+  EXPEDIEE: "expédiée",
+  LIVREE: "livrée",
+  ANNULEE: "annulée",
+  REMBOURSEE: "remboursée",
+};
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
   const admin = await requireSection("commandes");
@@ -46,6 +57,13 @@ export async function PATCH(request: Request, { params }: { params: { id: string
       entityId: order.id,
       metadata: { newStatus: parsed.data.status },
     },
+  });
+
+  await createNotification({
+    userId: order.userId,
+    type: "order-status",
+    title: `Commande ${order.orderNumber} : ${STATUS_LABELS[parsed.data.status] ?? parsed.data.status}`,
+    body: `Le statut de votre commande a été mis à jour : ${STATUS_LABELS[parsed.data.status] ?? parsed.data.status}.`,
   });
 
   return NextResponse.json({ order });

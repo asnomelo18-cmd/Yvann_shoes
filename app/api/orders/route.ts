@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/session";
 import { getShopSettings } from "@/lib/settings";
+import { createNotification } from "@/lib/notify";
 
 const createOrderSchema = z.object({
   items: z
@@ -135,6 +136,13 @@ export async function POST(request: Request) {
       });
 
       return createdOrder;
+    });
+
+    await createNotification({
+      userId: user.id,
+      type: "order-created",
+      title: `Commande ${order.orderNumber} enregistrée`,
+      body: "Nous avons bien reçu votre commande — elle est en attente de validation du paiement.",
     });
 
     return NextResponse.json({ order }, { status: 201 });

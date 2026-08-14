@@ -78,7 +78,7 @@ export default function ComptePage() {
           { icon: IconUserCircle, label: "Profil", desc: "Infos personnelles", href: "/compte/profil" },
           { icon: IconMapPin, label: "Adresses", desc: "Livraison & facturation", href: "/compte/adresses" },
           { icon: IconHeart, label: "Favoris", desc: "Vos coups de cœur", href: "/favoris" },
-          { icon: IconBell, label: "Notifications", desc: "Suivi & promos", href: null },
+          { icon: IconBell, label: "Notifications", desc: "Suivi & promos", href: "/compte/notifications" },
         ].map((item) =>
           item.href ? (
             <Link
@@ -138,7 +138,11 @@ export default function ComptePage() {
                 </tr>
               ) : (
                 orders.map((order) => (
-                  <tr key={order.id} className="text-text">
+                  <tr
+                    key={order.id}
+                    onClick={() => router.push(`/compte/commandes/${order.id}`)}
+                    className="cursor-pointer text-text hover:bg-surface-2"
+                  >
                     <td className="px-4 py-3 font-medium">{order.orderNumber}</td>
                     <td className="px-4 py-3 text-text-muted">{order.itemCount} paire(s)</td>
                     <td className="px-4 py-3 font-medium">{formatPrice(Number(order.total))}</td>

@@ -51,3 +51,16 @@ export function useMyOrders() {
     },
   });
 }
+
+export function useMyOrderDetail(id: string) {
+  return useQuery({
+    queryKey: ["my-order", id],
+    queryFn: async () => {
+      const res = await fetch(`/api/orders/${id}`);
+      if (!res.ok) throw new Error("Commande introuvable.");
+      const data = await res.json();
+      return data.order;
+    },
+    enabled: !!id,
+  });
+}
